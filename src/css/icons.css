@@ -1,0 +1,23 @@
+.icons {
+  width: 96vw;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2vw;
+  bottom: 2vh;
+}
+.icons .phone,
+.icons .chats {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.3em;
+}
+.icons .phone div img,
+.icons .chats div img {
+  height: 50px;
+}
+.icons .icon:hover img {
+  transform: scale(1.1);
+  transition: 0.3s;
+}

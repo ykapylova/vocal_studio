@@ -1,0 +1,43 @@
+@font-face {
+  font-family: GilroyBold;
+  src: url("../Gilroy-ExtraBold.otf");
+}
+
+.wrapperEmployees {
+  display: flex;
+  flex-wrap: wrap;
+  width: 820px;
+}
+
+.wrapperEmployees a.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.wrapperEmployees .card .image {
+  height: 70%;
+  overflow: hidden;
+}
+
+.wrapperEmployees .card .image img {
+  height: 100%;
+  transition: transform 0.7s ease-out;
+}
+
+.wrapperEmployees .card .title {
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.wrapperEmployees .card .desc {
+  color: black;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+.wrapperEmployees .card:hover .image img {
+  transform: scale(1.2);
+}

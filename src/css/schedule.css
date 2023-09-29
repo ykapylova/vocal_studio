@@ -1,0 +1,27 @@
+.schedule {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-bottom: black 1px solid;
+  margin: 3vh 0;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5em;
+}
+.schedule .schedule-item {
+  display: flex;
+  height: 15vh;
+}
+.schedule .schedule-item .group-name,
+.schedule .schedule-item .group-time {
+  width: 50%;
+  border: black 1px solid;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+}
+.price {
+  margin-bottom: 3vh;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5em;
+}

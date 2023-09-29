@@ -1,0 +1,46 @@
+.wrapperMedia {
+  display: flex;
+  flex-wrap: wrap;
+  width: 820px;
+}
+
+.wrapperMedia .card {
+  display: block;
+  width: 400px;
+  height: 250px;
+  overflow: hidden;
+  background-color: rgb(226, 167, 255);
+  position: relative;
+}
+
+.wrapperMedia .card img {
+  width: 100%;
+  transition: transform 0.7s ease-out;
+}
+
+.wrapperMedia .card .name {
+  position: absolute;
+  bottom: 30px;
+  left: 2%;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+}
+.wrapperMedia .card .date {
+  position: absolute;
+  bottom: 5px;
+  left: 2%;
+  color: white;
+  /* text-transform: uppercase; */
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+  font-size: 0.8em;
+}
+.wrapperMedia .card:hover img {
+  transform: scale(1.2);
+}
+
+.wrapperMedia iframe {
+  width: 100%;
+}
