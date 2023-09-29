@@ -2,9 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu } from "./Menu";
 
 export const Nav = () => {
-  if (useLocation().pathname === "/") {
-    return null;
-  }
+  // if (useLocation().pathname === "/") {
+  //   return null;
+  // }
   return (
     <header>
       <Link to="/">
