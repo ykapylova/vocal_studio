@@ -3,7 +3,7 @@ import { Banner } from "../components/Banner";
 export const Contact = () => {
   return (
     <main>
-      <Banner pageName={"Контакты"} imgSrc={"main.jpeg"}/>
+      <Banner pageName={"Контакты"} imgSrc={"banner-crystal-kids-jump"}/>
       <div className="wrapper wrapperContacts">
           <div className="text">
             <p>

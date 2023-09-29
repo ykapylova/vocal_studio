@@ -25,7 +25,7 @@ export const Employee = () => {
 
   return (
     <main>
-      <Banner pageName={"Наша команда"} imgSrc={"crystal-kids.jpeg"}/>
+      <Banner pageName={"Наша команда"} imgSrc={"banner-crystal-kids.jpeg"}/>
       <div className="wrapper wrapperEmployees">
         {teamList.map((teamMember, key) => (
           <TeamComponent
