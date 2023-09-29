@@ -32,7 +32,7 @@ export const Employee = () => {
             title={teamMember.title}
             desc={teamMember.desc}
             img={teamMember.img}
-            link={teamMember.link}
+            // link={teamMember.link}
           />
         ))}
       </div>
