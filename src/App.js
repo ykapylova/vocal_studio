@@ -7,7 +7,7 @@ import "./css/footer.css";
 import "./css/icons.css";
 import "./css/banner.css";
 import "./css/contacts.css";
-import "./css/employees.css";
+import "./css/team.css";
 import "./css/news.css";
 import "./css/media.css";
 
@@ -17,7 +17,7 @@ import { About } from "./pages/about";
 import { Footer } from "./components/Footer";
 import { Icons } from "./components/Icons";
 import { Contact } from "./pages/contacts";
-import { Employee } from "./pages/employees";
+import { Employee } from "./pages/team";
 import { News } from "./pages/news";
 import { Media } from "./pages/media";
 

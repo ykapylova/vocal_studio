@@ -11,7 +11,7 @@ export const Media = () => {
 
   return (
     <main>
-      <Banner pageName={"Галерея"} />
+      <Banner pageName={"Галерея"} imgSrc={"crystal-kids.JPG"}/>
       <div className="wrapper wrapperMedia">
         {mediaList.map((src, key) => (
           <a className="card" href="media1.html">

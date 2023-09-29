@@ -25,14 +25,14 @@ export const Employee = () => {
 
   return (
     <main>
-      <Banner pageName={"Наша команда"} />
+      <Banner pageName={"Наша команда"} imgSrc={"crystal-kids.jpeg"}/>
       <div className="wrapper wrapperEmployees">
         {teamList.map((teamMember, key) => (
           <TeamComponent
             title={teamMember.title}
             desc={teamMember.desc}
             img={teamMember.img}
-            link={teamMember.link}
+            // link={teamMember.link}
           />
         ))}
       </div>

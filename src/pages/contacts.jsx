@@ -3,7 +3,7 @@ import { Banner } from "../components/Banner";
 export const Contact = () => {
   return (
     <main>
-      <Banner pageName={"Контакты"} />
+      <Banner pageName={"Контакты"} imgSrc={"main.jpeg"}/>
       <div className="wrapper wrapperContacts">
           <div className="text">
             <p>
