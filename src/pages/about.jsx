@@ -25,7 +25,7 @@ export const About = () => {
    ]
   return (
     <main>
-      <Banner pageName={"О студии"} imgSrc={"about.jpg"}/>
+      <Banner pageName={"О студии"} imgSrc={"banner-crystal-jump.JPG"}/>
       <div className="wrapper wrapperAbout">
         {list.map((item, key) => {
           return <AboutItem text={item.text} images={item.images} />
