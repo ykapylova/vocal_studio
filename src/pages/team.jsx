@@ -1,32 +1,43 @@
 import { Banner } from "../components/Banner";
-import { TeamComponent } from "../components/TeamComponent";
 
-export const Employee = () => {
-  const teamList = [
-    {
-      title: "Реентович Кристина Николаевна",
-      desc: 'Основатель и руководитель образцовой шоу-группы "Тип-топ" и эстрадной вокальной студии "Crystal"',
-      img: "employee1.jpeg",
-      link: "employee1.html",
-    },
-    {
-      title: "Бельская Анна Анатольевна",
-      desc: 'Руководитель образцовой шоу-группы "Тип-топ"',
-      img: "employee2.png",
-      link: "employee2.html",
-    },
-    {
-      title: "Хореограф",
-      desc: 'Хореограф образцовой шоу-группы "Тип-топ" и эстрадной вокальной студии "Crystal"',
-      img: "employee3.jpeg",
-      link: "employee3.html",
-    },
-  ];
+const teamList = [
+  {
+    title: "Реентович Кристина Николаевна",
+    desc: 'Основатель и руководитель образцовой шоу-группы "Тип-топ" и эстрадной вокальной студии "Crystal"',
+    img: "team1.jpeg",
+    link: "team1.html",
+  },
+  {
+    title: "Бельская Анна Анатольевна",
+    desc: 'Руководитель образцовой шоу-группы "Тип-топ"',
+    img: "team2.png",
+    link: "team2.html",
+  },
+  {
+    title: "Хореограф",
+    desc: 'Хореограф образцовой шоу-группы "Тип-топ" и эстрадной вокальной студии "Crystal"',
+    img: "team3.jpeg",
+    link: "team3.html",
+  },
+];
 
+const TeamComponent = (props) => {
+  return (
+    <a className="card" href={props.link}>
+      <div className="image">
+        <img src={"img/team/" + props.img} alt="" />
+      </div>
+      <div className="name">{props.title}</div>
+      <div className="desc">{props.desc}</div>
+    </a>
+  );
+};
+
+export const Team = () => {
   return (
     <main>
-      <Banner pageName={"Наша команда"} imgSrc={"banner-crystal-kids.jpeg"}/>
-      <div className="wrapper wrapperEmployees">
+      <Banner pageName={"Наша команда"} imgSrc={"banner-crystal-kids.jpeg"} />
+      <div className="wrapper wrapperTeam">
         {teamList.map((teamMember, key) => (
           <TeamComponent
             title={teamMember.title}

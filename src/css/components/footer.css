@@ -1,0 +1,38 @@
+footer {
+  background-color: rgb(226, 167, 255);
+  width: 100vw;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  padding: 4vh 0;
+  font-size: 0.8em;
+  height: 25vh;
+}
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  width: 70vw;
+}
+
+footer .contacts,
+footer .menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  color: white;
+  font-weight: bold;
+  text-align: left;
+
+  gap: 10px;
+
+  width: 50%;
+}
+
+footer .contacts {
+  align-items: start;
+}
+
+footer .menu {
+  align-items: end;
+}

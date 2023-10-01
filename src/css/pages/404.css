@@ -1,0 +1,34 @@
+#message {
+  width: 70vw;
+  height: 57vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+#message h2 {
+  color: rgb(226, 167, 255);
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+#message h1 {
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+  margin: 0 0 16px;
+}
+#message p {
+  line-height: 140%;
+  margin: 16px 0 24px;
+}
+
+@media (max-width: 600px) {
+  body,
+  #message {
+    margin-top: 0;
+    background: white;
+    box-shadow: none;
+  }
+  body {
+    border-top: rgb(226, 167, 255);
+  }
+}

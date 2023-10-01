@@ -1,0 +1,39 @@
+
+.wrapperTeam {
+  display: flex;
+  flex-wrap: wrap;
+  width: 820px;
+}
+
+.wrapperTeam a.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.wrapperTeam .card .image {
+  height: 70%;
+  overflow: hidden;
+}
+
+.wrapperTeam .card .image img {
+  height: 100%;
+  transition: transform 0.7s ease-out;
+}
+
+.wrapperTeam .card .title {
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.wrapperTeam .card .desc {
+  color: black;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+.wrapperTeam .card:hover .image img {
+  transform: scale(1.2);
+}

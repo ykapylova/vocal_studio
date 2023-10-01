@@ -1,0 +1,24 @@
+header {
+  width: 90vw;
+  padding: 1vh 5vw;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(226, 167, 255);
+  color: white;
+  text-transform: uppercase;
+}
+
+header img {
+  height: 100%;
+  border-radius: 50%;
+}
+
+header .menu {
+  display: flex;
+  font-weight: bold;
+  width: 75%;
+  justify-content: end;
+  gap: 60px;
+  align-items: center;
+}
