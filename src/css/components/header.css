@@ -9,16 +9,94 @@ header {
   text-transform: uppercase;
 }
 
-header img {
+header img.logo {
   height: 100%;
   border-radius: 50%;
 }
 
-header .menu {
+header .menu,
+.signin-button {
   display: flex;
   font-weight: bold;
-  width: 75%;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 60px;
   align-items: center;
+}
+
+header .menu {
+
+  width: 60%;
+}
+
+/* блок с юзером */
+.navUserInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+  margin-left: 30px;
+  /* font-family: GilroyBold; */
+}
+
+.navUserInfo .img-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.navUserInfo .img-container img {
+  height: 100%;
+}
+
+.submenu {
+  display: flex;
+  gap: 5px;
+  width: 200px;
+  justify-content: flex-end;
+}
+
+.submenu-buttons {
+  display: none;
+  flex-direction: column;
+
+  position: absolute;
+  right: 5vw;
+  z-index: 1000;
+  top: 7vh;
+  padding-top: 2vh;
+}
+
+.signin-button {
+  display: flex;
+}
+
+.logout-button,
+.schedule-button,
+.chat-button {
+  justify-content: flex-end;
+  padding: 1vh 10px;
+  outline: none;
+  background-color: rgb(226, 167, 255);
+  border: none;
+  font-size: 1em;
+  font-family: Gilroy;
+  color: white;
+  width: 200px;
+  height: 6vh;
+  text-align: end;
+  align-items: center;
+}
+
+.submenu:hover .submenu-buttons {
+  display: flex;
+}
+
+.submenu:hover,
+.signin-button:hover,
+.logout-button:hover,
+.schedule-button:hover,
+.chat-button:hover {
+  cursor: pointer;
 }

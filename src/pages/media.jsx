@@ -14,7 +14,7 @@ export const Media = () => {
       <Banner pageName={"Галерея"} imgSrc={"banner-crystal-kids1.jpeg"}/>
       <div className="wrapper wrapperMedia">
         {mediaList.map((src, key) => (
-          <a className="card">
+          <div className="card">
             <iframe
               width="560"
               height="315"
@@ -24,7 +24,7 @@ export const Media = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>
-          </a>
+          </div>
         ))}
       </div>
       <div></div>

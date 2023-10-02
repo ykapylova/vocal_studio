@@ -29,6 +29,7 @@ export const Contact = () => {
             width="500"
             height="400"
             frameborder="0"
+            title="map"
           />
 
       </div>

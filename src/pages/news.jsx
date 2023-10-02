@@ -20,13 +20,13 @@ const newsList = [
 
 const NewsComponent = (props) => {
   return (
-    <a className="card">
+    <div className="card">
       <div className="image">
         <img src={"img/"+props.img} alt="" />
       </div>
       <div className="name">{props.title}</div>
       <div className="desc">{props.date}</div>
-    </a>
+    </div>
   );
 };
 

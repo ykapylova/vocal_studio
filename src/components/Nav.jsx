@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+// элемент навигации
 export const NavItem = (props) => {
   return (
     <Link to={"/" + props.item}>
@@ -8,26 +9,20 @@ export const NavItem = (props) => {
   );
 };
 
-export const Nav = () => {
-  const navItemsList = [
-    "about",
-    "team",
-    // "schedule",
-    // "news",
-    "media",
-    "contacts",
-  ];
-  const navItemsText = [
-    "О студии",
-    "Наша команда",
-    // "Расписание",
-    // "Новости",
-    "Галерея",
-    "Контакты",
-  ];
+//списки с навигацией
+const navItemsList = {
+  about: "О студии",
+  team: "Наша команда",
+  // "schedule": "Расписание",
+  // "news": "Новости",
+  media: "Галерея",
+  contacts: "Контакты",
+};
 
-  const navItems = navItemsList.map((menuItem, key) => (
-    <NavItem key={key} item={menuItem} text={navItemsText[key]} />
+//
+export const Nav = () => {
+  const navItems = Object.keys(navItemsList).map((text) => (
+    <NavItem item={text} text={navItemsList[text]} />
   ));
 
   return <div className="menu">{navItems}</div>;

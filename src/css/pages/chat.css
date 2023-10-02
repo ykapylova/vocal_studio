@@ -1,0 +1,52 @@
+.wrapperChat {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.wrapperChat .posts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px;
+}
+
+.wrapperChat .posts .post {
+  display: flex;
+  background-color: rgb(241, 214, 255);
+  padding: 15px;
+  border-radius: 15px;
+  gap: 10px;
+}
+
+.wrapperChat form textarea {
+  width: 100%;
+  border: 1px solid rgb(226, 167, 255);
+  outline: none;
+  background-color: white;
+  border-radius: 5px;
+  height: 50px;
+
+  padding: 10px;
+  color: rgb(226, 167, 255);
+  font-family: Gilroy;
+  font-size: 1em;
+}
+
+.wrapperChat form textarea::placeholder {
+  color: rgba(226, 167, 255, 0.532);
+  font-family: Gilroy;
+  font-size: 1em;
+}
+
+.wrapperChat form input {
+  border: 1px solid rgb(226, 167, 255);
+  outline: none;
+  background-color: rgba(226, 167, 255, 0.452);
+  border-radius: 5px;
+  width: 120px;
+  color: white;
+  font-family: Gilroy;
+  font-size: 0.8em;
+  height: 40px;
+}
