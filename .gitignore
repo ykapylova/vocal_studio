@@ -15,4 +15,4 @@ yarn-debug.log*
 yarn-error.log*
 
 
-node_modules/.cache/default-development/0.pack
+node_modules/.cache/
