@@ -49,7 +49,7 @@ export const Chat = () => {
     return () => unsubscribe();
   }, [postsRef]);
 
-  
+
   console.log(postsList);
   // Возвращаем разметку компонента
   return (
@@ -59,7 +59,7 @@ export const Chat = () => {
       <div className="wrapper wrapperChat">
         {/* Отображаем список постов */}
         <div className="posts">
-          {postsList?.reverse().map((post) => (
+          {postsList?.map((post) => (
             <Post post={post} />
           ))}
         </div>
