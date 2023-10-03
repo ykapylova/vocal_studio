@@ -3,6 +3,7 @@ import { Nav } from "../components/Nav";
 export const Home = () => {
   return (
     <div className="homeWrapper">
+      <Link to={"/login"}>Вход</Link>
       <main>
         <Nav />
         <div className="logo">

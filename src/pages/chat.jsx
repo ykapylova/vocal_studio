@@ -49,8 +49,6 @@ export const Chat = () => {
     return () => unsubscribe();
   }, [postsRef]);
 
-  
-  console.log(postsList);
   // Возвращаем разметку компонента
   return (
     <main>
