@@ -37,7 +37,7 @@ export const Chat = () => {
   // Используем хук useEffect для выполнения функции getPosts при загрузке компонента
   useEffect(() => {
     // Используем onSnapshot для обновления данных в режиме реального времени
-    const unsubscribe = onSnapshot(query(postsRef, orderBy("time")), (querySnapshot) => {
+    const unsubscribe = onSnapshot(query(postsRef, orderBy("time", "desc")), (querySnapshot) => {
       const posts = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
@@ -49,7 +49,7 @@ export const Chat = () => {
     return () => unsubscribe();
   }, [postsRef]);
 
-
+  
   console.log(postsList);
   // Возвращаем разметку компонента
   return (
@@ -59,7 +59,7 @@ export const Chat = () => {
       <div className="wrapper wrapperChat">
         {/* Отображаем список постов */}
         <div className="posts">
-          {postsList?.map((post) => (
+          {postsList?.reverse().map((post) => (
             <Post post={post} />
           ))}
         </div>
