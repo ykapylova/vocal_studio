@@ -7,27 +7,69 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../config/firebase.ts";
+import { auth, db } from "../config/firebase.ts";
+import { useState } from "react";
+import { collection, doc, getDocs, query, updateDoc } from "firebase/firestore";
 
 export const Profile = () => {
   const a = getAuth();
   const storage = getStorage();
   const [user] = useAuthState(auth);
+  const [photoURLsList, setPhotoURLsList] = useState(null);
+
+  const photoURLsRef = collection(db, "users");
+
+  const getPhotoURLs = async () => {
+    const querySnapshot = await getDocs(query(photoURLsRef));
+    // Обновляем состояние postsList данными из Firestore
+    const photoURLs = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setPhotoURLsList(photoURLs);
+  };
 
   const updateDisplayName = () => {
     const name = document.querySelector(".name");
-    if (name)
+    if (name) {
       updateProfile(a.currentUser, {
         displayName: name.value,
       })
         .then(() => {
           name.value = "";
+          
+          photoURLsList?.map(async (userPhotoDoc) => {
+            if (userPhotoDoc.userId == user.uid) {
+              try {
+                // Обновляем поле "name" пользователя
+                const userDoc = doc(db, "usersPhotoURLs", userPhotoDoc.id);
+                const newFields = { displayName: name.value };
+                await updateDoc(userDoc, newFields);
+
+                // await photoURLsRef.doc(userPhotoDoc).update({
+                //   photoURL: downloadURL,
+                // });
+
+                console.log(
+                  'Поле "photoURL" пользователя успешно обновлено.'
+                );
+              } catch (error) {
+                console.error(
+                  'Ошибка при обновлении поля "photoURL":',
+                  error
+                );
+              }
+            }
+          });
+
           window.location.reload();
         })
         .catch((error) => {
-          console.log("Не удалось обновить изображение профиля");
+          console.log("Не удалось обновить имя пользователя");
         });
+    }
   };
+  
 
   const updatePhotoURL = () => {
     const file = document.querySelector(".image").files[0];
@@ -49,29 +91,70 @@ export const Profile = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          let oldPhotoURL = null;
-          let deleteFileName = null;
-          try {
-            oldPhotoURL = a.currentUser.photoURL.split("%2F");
-            deleteFileName = oldPhotoURL[oldPhotoURL.length - 1].split("?")[0];
-          } catch (error) {
-            console.log("Пользователь установил первое изображение");
-          }
-          
+          // удаление старого изображения
+
+          // let oldPhotoURL = null;
+          // let deleteFileName = null;
+          // try {
+          //   oldPhotoURL = a.currentUser.photoURL.split("%2F");
+          //   deleteFileName = oldPhotoURL[oldPhotoURL.length - 1].split("?")[0];
+          // } catch (error) {
+          //   console.log("Пользователь установил первое изображение");
+          // }
+
           updateProfile(a.currentUser, {
             photoURL: downloadURL,
           })
             .then(() => {
-              deleteObject(ref(storage, "images/" + deleteFileName)).catch(
-                () => {
-                  console.log("Не удалось удалить предыдущее фото");
+              // удаление старого изображения
+
+              // deleteObject(ref(storage, "images/" + deleteFileName)).catch(
+              //   () => {
+              //     console.log("Не удалось удалить предыдущее фото");
+              //   }
+              // );
+
+              const getPhotoURLs = async () => {
+                const querySnapshot = await getDocs(query(photoURLsRef));
+                // Обновляем состояние postsList данными из Firestore
+                const photoURLs = querySnapshot.docs.map((doc) => ({
+                  ...doc.data(),
+                  id: doc.id,
+                }));
+                setPhotoURLsList(photoURLs);
+              };
+
+              getPhotoURLs();
+
+              photoURLsList?.map(async (userPhotoDoc) => {
+                if (userPhotoDoc.userId == user.uid) {
+                  try {
+                    // Обновляем поле "name" пользователя
+                    const userDoc = doc(db, "usersPhotoURLs", userPhotoDoc.id);
+                    const newFields = { photoURL: downloadURL };
+                    await updateDoc(userDoc, newFields);
+
+                    // await photoURLsRef.doc(userPhotoDoc).update({
+                    //   photoURL: downloadURL,
+                    // });
+
+                    console.log(
+                      'Поле "photoURL" пользователя успешно обновлено.'
+                    );
+                  } catch (error) {
+                    console.error(
+                      'Ошибка при обновлении поля "photoURL":',
+                      error
+                    );
+                  }
                 }
-              );
-              window.location.reload();
+              });
+
+              // window.location.reload();
             })
             .catch((error) => {
               console.error(error);
-              console.log("Не удалось изменит изображение");
+              console.log("Не удалось изменить изображение");
             });
         });
       }
