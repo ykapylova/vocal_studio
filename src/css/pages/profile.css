@@ -34,14 +34,7 @@
 
 .wrapperProfile .new-image-setting button,
 .wrapperProfile .profile-settings button {
-  border: 1px solid rgb(226, 167, 255);
-  outline: none;
-  background-color: rgba(226, 167, 255, 0.452);
-  border-radius: 5px;
-  width: 120px;
-  color: white;
-  font-family: Gilroy;
-  font-size: 0.8em;
+  width: 150px;
   height: 50px;
 }
 
@@ -50,6 +43,12 @@
 }
 
 .wrapperProfile .profile-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wrapperProfile .profile-settings > * {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -63,20 +62,20 @@
 
 .wrapperProfile .profile-settings input {
   width: 300px;
-  border: 1px solid rgb(226, 167, 255);
+  border: 1px solid var(--main-color);
   outline: none;
   background-color: white;
   border-radius: 5px;
   height: 50px;
 
   padding: 0 10px;
-  color: rgb(226, 167, 255);
+  color: var(--main-color);
   font-family: Gilroy;
   font-size: 1em;
 }
 
 .wrapperProfile .profile-settings input::placeholder {
-  color: rgba(226, 167, 255, 0.532);
+  color: var(--light-color);
   font-family: Gilroy;
   font-size: 1em;
 }

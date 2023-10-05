@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../config/firebase.ts";
+import { useEffect } from "react";
 
 export const CreatePostForm = () => {
   // Используем хук useAuthState для получения данных о пользователе из Firebase Authentication
@@ -23,6 +24,11 @@ export const CreatePostForm = () => {
     resolver: yupResolver(schema),
   });
 
+  const handleSubmitForm = (e) => {
+    e.preventDefault()
+    handleSubmit(onCreatePost)()
+  }
+
   // Функция для обработки отправки формы и добавления нового поста в базу данных
   const onCreatePost = async (data) => {
     // Добавляем новый документ в коллекцию "posts" с данными из формы и информацией о пользователе
@@ -36,7 +42,7 @@ export const CreatePostForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onCreatePost)}>
+    <form onSubmit={handleSubmitForm}>
       <textarea placeholder="Напишите сообщение" {...register("text")} />
       <input type="submit" value="Отправить" />
     </form>

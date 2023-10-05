@@ -11,6 +11,8 @@ import "./css/pages/team.css";
 import "./css/pages/news.css";
 import "./css/pages/media.css";
 import "./css/pages/profile.css";
+import "./css/pages/login.css";
+import "./css/pages/admin.css";
 import "./css/pages/chat.css";
 import "./css/pages/404.css";
 
@@ -29,6 +31,7 @@ import { Schedule } from "./pages/schedule";
 import { Chat } from "./pages/chat";
 import { Login } from "./pages/login";
 import { Profile} from "./pages/profile";
+import { Admin } from "./pages/admin";
 
 function App() {
   return (
@@ -46,6 +49,7 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

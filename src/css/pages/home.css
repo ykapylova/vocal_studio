@@ -1,12 +1,17 @@
-.homeWrapper .menu a {
+.homeWrapper main a {
   color: black;
 }
 
 .homeWrapper main {
-  height: 100vh;
+  height: 88vh;
   display: flex;
   flex-direction: row;
   gap: 0px;
+}
+
+.homeWrapper header {
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .homeWrapper .logo {

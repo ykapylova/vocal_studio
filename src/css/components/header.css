@@ -4,7 +4,7 @@ header {
   height: 10vh;
   display: flex;
   justify-content: space-between;
-  background-color: rgb(226, 167, 255);
+  background-color: var(--main-color);
   color: white;
   text-transform: uppercase;
 }
@@ -42,7 +42,7 @@ header .menu {
 .navUserInfo .img-container {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   overflow: hidden;
 }
 
@@ -72,13 +72,17 @@ header .menu {
   display: flex;
 }
 
+.signin {
+  display: flex;
+}
+
 .logout-button,
 .schedule-button,
 .chat-button {
   justify-content: flex-end;
   padding: 1vh 10px;
   outline: none;
-  background-color: rgb(226, 167, 255);
+  background-color: var(--main-color);
   border: none;
   font-size: 1em;
   font-family: Gilroy;

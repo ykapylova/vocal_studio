@@ -7,7 +7,7 @@
   align-items: flex-start;
 }
 #message h2 {
-  color: rgb(226, 167, 255);
+  color: var(--main-color);
   font-weight: bold;
   margin: 0 0 8px;
 }
@@ -29,6 +29,6 @@
     box-shadow: none;
   }
   body {
-    border-top: rgb(226, 167, 255);
+    border-top: var(--main-color);
   }
 }

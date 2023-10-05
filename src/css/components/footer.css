@@ -1,5 +1,5 @@
 footer {
-  background-color: rgb(226, 167, 255);
+  background-color: var(--main-color);
   width: 100vw;
   text-transform: uppercase;
   display: flex;

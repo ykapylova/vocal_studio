@@ -1,164 +1,86 @@
-import { getAuth, updateProfile } from "firebase/auth";
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  deleteObject,
-} from "firebase/storage";
+import { useState, useEffect } from "react";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../config/firebase.ts";
-import { useState } from "react";
-import { collection, doc, getDocs, query, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { db, storage } from "../config/firebase.ts";
+import { getAuth, updateProfile } from "firebase/auth";
 
 export const Profile = () => {
-  const a = getAuth();
-  const storage = getStorage();
+  const auth = getAuth();
   const [user] = useAuthState(auth);
-  const [photoURLsList, setPhotoURLsList] = useState(null);
+  const [photoURLsList, setPhotoURLsList] = useState([]);
 
   const photoURLsRef = collection(db, "users");
 
-  const getPhotoURLs = async () => {
-    const querySnapshot = await getDocs(query(photoURLsRef));
-    // Обновляем состояние postsList данными из Firestore
-    const photoURLs = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    setPhotoURLsList(photoURLs);
-  };
+  useEffect(() => {
+    const getPhotoURLs = async () => {
+      const querySnapshot = await getDocs(photoURLsRef);
+      const photoURLs = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setPhotoURLsList(photoURLs);
+    };
 
-  const updateDisplayName = () => {
-    const name = document.querySelector(".name");
-    if (name) {
-      updateProfile(a.currentUser, {
-        displayName: name.value,
-      })
-        .then(() => {
-          name.value = "";
-          
-          photoURLsList?.map(async (userPhotoDoc) => {
-            if (userPhotoDoc.userId == user.uid) {
-              try {
-                // Обновляем поле "name" пользователя
-                const userDoc = doc(db, "usersPhotoURLs", userPhotoDoc.id);
-                const newFields = { displayName: name.value };
-                await updateDoc(userDoc, newFields);
+    getPhotoURLs();
+  }, [photoURLsRef]);
 
-                // await photoURLsRef.doc(userPhotoDoc).update({
-                //   photoURL: downloadURL,
-                // });
+  const updateDisplayName = async () => {
+    const nameInput = document.querySelector(".name");
+    if (nameInput) {
+      const newName = nameInput.value.trim();
 
-                console.log(
-                  'Поле "photoURL" пользователя успешно обновлено.'
-                );
-              } catch (error) {
-                console.error(
-                  'Ошибка при обновлении поля "photoURL":',
-                  error
-                );
-              }
-            }
-          });
-
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.log("Не удалось обновить имя пользователя");
-        });
-    }
-  };
-  
-
-  const updatePhotoURL = () => {
-    const file = document.querySelector(".image").files[0];
-    if (!file) {
-      return 0;
-    }
-
-    const storageRef = ref(storage, "images/" + file.name);
-
-    // Загрузите файл в Firebase Storage
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    // Отслеживайте состояние загрузки
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {},
-      (error) => {
-        console.error(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          // удаление старого изображения
-
-          // let oldPhotoURL = null;
-          // let deleteFileName = null;
-          // try {
-          //   oldPhotoURL = a.currentUser.photoURL.split("%2F");
-          //   deleteFileName = oldPhotoURL[oldPhotoURL.length - 1].split("?")[0];
-          // } catch (error) {
-          //   console.log("Пользователь установил первое изображение");
-          // }
-
-          updateProfile(a.currentUser, {
-            photoURL: downloadURL,
-          })
-            .then(() => {
-              // удаление старого изображения
-
-              // deleteObject(ref(storage, "images/" + deleteFileName)).catch(
-              //   () => {
-              //     console.log("Не удалось удалить предыдущее фото");
-              //   }
-              // );
-
-              const getPhotoURLs = async () => {
-                const querySnapshot = await getDocs(query(photoURLsRef));
-                // Обновляем состояние postsList данными из Firestore
-                const photoURLs = querySnapshot.docs.map((doc) => ({
-                  ...doc.data(),
-                  id: doc.id,
-                }));
-                setPhotoURLsList(photoURLs);
-              };
-
-              getPhotoURLs();
-
-              photoURLsList?.map(async (userPhotoDoc) => {
-                if (userPhotoDoc.userId == user.uid) {
-                  try {
-                    // Обновляем поле "name" пользователя
-                    const userDoc = doc(db, "usersPhotoURLs", userPhotoDoc.id);
-                    const newFields = { photoURL: downloadURL };
-                    await updateDoc(userDoc, newFields);
-
-                    // await photoURLsRef.doc(userPhotoDoc).update({
-                    //   photoURL: downloadURL,
-                    // });
-
-                    console.log(
-                      'Поле "photoURL" пользователя успешно обновлено.'
-                    );
-                  } catch (error) {
-                    console.error(
-                      'Ошибка при обновлении поля "photoURL":',
-                      error
-                    );
-                  }
-                }
-              });
-
-              // window.location.reload();
-            })
-            .catch((error) => {
-              console.error(error);
-              console.log("Не удалось изменить изображение");
-            });
-        });
+      if (newName) {
+        try {
+          await updateProfile(auth.currentUser, { displayName: newName });
+          await updateDoc(
+            photoURLsRef.doc(
+              photoURLsList.find((userDoc) => userDoc.userId == user.uid)
+            ),
+            { displayName: newName }
+          );
+          console.log("Имя пользователя успешно обновлено.");
+        } catch (error) {
+          console.error("Ошибка при обновлении имени пользователя:", error);
+        }
       }
-    );
+    }
+  };
+
+  const updatePhotoURL = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      try {
+        const storageRef = ref(storage, `images/${user.uid}/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        await uploadTask;
+
+        const downloadURL = await getDownloadURL(storageRef);
+
+        // Ожидаем завершения запроса getDocs и обновляем данные
+        await getDocs(photoURLsRef).then((querySnapshot) => {
+          const updatedPhotoURLsList = querySnapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          // На этом этапе у нас есть обновленный массив данных photoURLsList
+          // Обновляем photoURL в Firestore
+          const userDoc = updatedPhotoURLsList.find(
+            (userDoc) => userDoc.userId === user.uid
+          );
+          if (userDoc) {
+            const userDocRef = doc(photoURLsRef, userDoc.id);
+            updateDoc(userDocRef, { photoURL: downloadURL });
+          }
+        });
+
+        // Обновляем фото пользователя в аутентификации Firebase
+        await updateProfile(auth.currentUser, { photoURL: downloadURL });
+        console.log("Изображение профиля успешно обновлено.");
+      } catch (error) {
+        console.error("Ошибка при обновлении изображения профиля:", error);
+      }
+    }
   };
 
   return (
@@ -166,25 +88,51 @@ export const Profile = () => {
       <div></div>
       <div className="wrapper wrapperProfile">
         <div className="profile-image">
-          <img src={user?.photoURL} alt="" />
+          <img src={user?.photoURL} alt="Profile" />
           <div className="new-image-setting">
             <label className="custom-file-upload">
-              <input type="file" className="image" onChange={updatePhotoURL} />
+              <input
+                type="file"
+                className="image"
+                onChange={updatePhotoURL}
+                accept="image/*"
+              />
               <div>Загрузить новое изображение</div>
-              <img src="img/icons/icon-upload-file.png" alt="" />
             </label>
           </div>
         </div>
 
         <div className="profile-settings">
-          <div>Имя пользователя</div>
-          <div className="new-name-form">
-            <input
-              type="text"
-              placeholder={user?.displayName}
-              className="name"
-            />
-            <button onClick={updateDisplayName}>Изменить имя</button>
+          <div className="displayName">
+            <div>Имя пользователя</div>
+            <div className="new-name-form">
+              <input
+                type="text"
+                placeholder={user?.displayName}
+                className="name"
+              />
+              <button onClick={updateDisplayName}>Изменить имя</button>
+            </div>
+          </div>
+          <div className="email">
+            <div>E-mail</div>
+            <div className="new-name-form">
+              <input
+                type="text"
+                placeholder={user?.email}
+                className="name"
+              />
+            </div>
+          </div>
+          <div className="group">
+            <div>Группа</div>
+            <div className="new-name-form">
+              <input
+                type="text"
+                placeholder={user?.group}
+                className="name"
+              />
+            </div>
           </div>
         </div>
       </div>

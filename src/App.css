@@ -8,6 +8,11 @@
   src: url("fonts/Gilroy-ExtraBold.otf");
 }
 
+:root {
+  --main-color: rgb(226, 167, 255);
+  --light-color: rgba(226, 167, 255, 0.532);
+}
+
 body {
   margin: 0;
 }
@@ -66,4 +71,14 @@ main {
 .menu--item:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+main button {
+  border: 1px solid var(--main-color);
+  outline: none;
+  background-color: var(--light-color);
+  border-radius: 5px;
+  color: white;
+  font-family: Gilroy;
+  font-size: 1em;
 }

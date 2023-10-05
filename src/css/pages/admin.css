@@ -1,0 +1,32 @@
+.wrapperAdmin form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wrapperAdmin input {
+  width: 300px;
+  border: 1px solid var(--main-color);
+  outline: none;
+  background-color: white;
+  border-radius: 5px;
+  height: 50px;
+
+  padding: 0 10px;
+  color: var(--main-color);
+  font-family: Gilroy;
+  font-size: 1em;
+}
+
+.wrapperAdmin input::placeholder {
+  color: var(--light-color);
+  font-family: Gilroy;
+  font-size: 1em;
+}
+
+
+.wrapperAdmin button {
+  width: 200px;
+  height: 50px;
+}
