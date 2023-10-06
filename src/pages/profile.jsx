@@ -8,22 +8,30 @@ import { getAuth, updateProfile } from "firebase/auth";
 export const Profile = () => {
   const auth = getAuth();
   const [user] = useAuthState(auth);
-  const [photoURLsList, setPhotoURLsList] = useState([]);
+  const [usersList, setUsersList] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
 
-  const photoURLsRef = collection(db, "users");
+  const usersRef = collection(db, "users");
 
   useEffect(() => {
-    const getPhotoURLs = async () => {
-      const querySnapshot = await getDocs(photoURLsRef);
-      const photoURLs = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setPhotoURLsList(photoURLs);
-    };
-
-    getPhotoURLs();
-  }, [photoURLsRef]);
+    if (user) {
+      const getUsers = async () => {
+        const usersRef = collection(db, "users");
+        try {
+          const querySnapshot = await getDocs(usersRef);
+          const users = querySnapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          setUsersList(users);
+          setUserInfo(users.find((userDoc) => userDoc.userId === user?.uid));
+        } catch (error) {
+          console.error("Ошибка при получении данных пользователя:", error);
+        }
+      };
+      getUsers();
+    }
+  }, [user]);
 
   const updateDisplayName = async () => {
     const nameInput = document.querySelector(".name");
@@ -34,12 +42,17 @@ export const Profile = () => {
         try {
           await updateProfile(auth.currentUser, { displayName: newName });
           await updateDoc(
-            photoURLsRef.doc(
-              photoURLsList.find((userDoc) => userDoc.userId == user.uid)
+            doc(
+              usersRef,
+              usersList.find((userDoc) => userDoc.userId === user?.uid).id
             ),
             { displayName: newName }
           );
+          setUserInfo({ ...userInfo, displayName: newName });
+
           console.log("Имя пользователя успешно обновлено.");
+          nameInput.value = "";
+          window.location.reload(false);
         } catch (error) {
           console.error("Ошибка при обновлении имени пользователя:", error);
         }
@@ -47,39 +60,33 @@ export const Profile = () => {
     }
   };
 
-  const updatePhotoURL = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      try {
-        const storageRef = ref(storage, `images/${user.uid}/${file.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, file);
-        await uploadTask;
-
-        const downloadURL = await getDownloadURL(storageRef);
-
-        // Ожидаем завершения запроса getDocs и обновляем данные
-        await getDocs(photoURLsRef).then((querySnapshot) => {
-          const updatedPhotoURLsList = querySnapshot.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }));
-          // На этом этапе у нас есть обновленный массив данных photoURLsList
-          // Обновляем photoURL в Firestore
-          const userDoc = updatedPhotoURLsList.find(
-            (userDoc) => userDoc.userId === user.uid
-          );
-          if (userDoc) {
-            const userDocRef = doc(photoURLsRef, userDoc.id);
-            updateDoc(userDocRef, { photoURL: downloadURL });
-          }
-        });
-
-        // Обновляем фото пользователя в аутентификации Firebase
-        await updateProfile(auth.currentUser, { photoURL: downloadURL });
-        console.log("Изображение профиля успешно обновлено.");
-      } catch (error) {
-        console.error("Ошибка при обновлении изображения профиля:", error);
+  const updatePhotoURL = async (event, operationType) => {
+    try {
+      let downloadURL = "";
+      if (operationType === "update") {
+        const file = event.target.files[0];
+        if (file) {
+          const storageRef = ref(storage, `images/${file.name}`);
+          const uploadTask = uploadBytesResumable(storageRef, file);
+          await uploadTask;
+          downloadURL = await getDownloadURL(storageRef);
+        }
       }
+  
+      await updateProfile(auth.currentUser, { photoURL: downloadURL });
+      await updateDoc(
+        doc(
+          usersRef,
+          usersList.find((userDoc) => userDoc.userId === user?.uid).id
+        ),
+        { photoURL: downloadURL }
+      );
+  
+      setUserInfo({ ...userInfo, photoURL: downloadURL });
+      console.log("Изображение профиля успешно обновлено.");
+      window.location.reload(false);
+    } catch (error) {
+      console.error("Ошибка при обновлении изображения профиля:", error);
     }
   };
 
@@ -88,50 +95,57 @@ export const Profile = () => {
       <div></div>
       <div className="wrapper wrapperProfile">
         <div className="profile-image">
-          <img src={user?.photoURL} alt="Profile" />
+          {userInfo.photoURL && <img src={userInfo.photoURL} alt="Profile" />}
+
           <div className="new-image-setting">
             <label className="custom-file-upload">
               <input
                 type="file"
                 className="image"
-                onChange={updatePhotoURL}
+                onChange={(e) => updatePhotoURL(e, "update")}
                 accept="image/*"
               />
               <div>Загрузить новое изображение</div>
             </label>
           </div>
+
+          <button onClick={(e) => updatePhotoURL(e, "delete")}>Удалить текущее изображение</button>
+          
         </div>
 
         <div className="profile-settings">
-          <div className="displayName">
+          <div className="name-container">
             <div>Имя пользователя</div>
             <div className="new-name-form">
               <input
                 type="text"
-                placeholder={user?.displayName}
+                placeholder={userInfo.displayName || ""}
                 className="name"
               />
               <button onClick={updateDisplayName}>Изменить имя</button>
             </div>
           </div>
-          <div className="email">
+          <div className="email-container">
             <div>E-mail</div>
             <div className="new-name-form">
               <input
                 type="text"
                 placeholder={user?.email}
-                className="name"
+                className="email"
+                readOnly
               />
             </div>
           </div>
-          <div className="group">
+          <div className="group-container">
             <div>Группа</div>
             <div className="new-name-form">
               <input
                 type="text"
-                placeholder={user?.group}
-                className="name"
+                placeholder={userInfo.group ? userInfo.group : ""}
+                className="group"
+                readOnly
               />
+              {/* <button onClick={updateGroup}>Изменить группу</button> */}
             </div>
           </div>
         </div>

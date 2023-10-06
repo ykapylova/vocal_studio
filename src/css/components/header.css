@@ -78,7 +78,7 @@ header .menu {
 
 .logout-button,
 .schedule-button,
-.chat-button {
+.submenu-buttons button {
   justify-content: flex-end;
   padding: 1vh 10px;
   outline: none;

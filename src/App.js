@@ -17,8 +17,7 @@ import "./css/pages/chat.css";
 import "./css/pages/404.css";
 
 import { Home } from "./pages/home";
-// import { Header } from "./components/Header";
-import { Header } from "./components/Header2";
+import { Header } from "./components/Header";
 import { About } from "./pages/about";
 import { Footer } from "./components/Footer";
 import { Icons } from "./components/Icons";

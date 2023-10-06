@@ -11,6 +11,7 @@
 :root {
   --main-color: rgb(226, 167, 255);
   --light-color: rgba(226, 167, 255, 0.532);
+  --input-color: rgba(241, 214, 255, 0.2);
 }
 
 body {
@@ -81,4 +82,26 @@ main button {
   color: white;
   font-family: Gilroy;
   font-size: 1em;
+}
+
+main input {
+  border: 1px solid var(--main-color);
+  outline: none;
+  background-color: white;
+  border-radius: 5px;
+
+  padding: 0 10px;
+  color: var(--main-color);
+  font-family: Gilroy;
+  font-size: 1em;
+}
+
+main input::placeholder {
+  color: var(--light-color);
+  font-family: Gilroy;
+  font-size: 1em;
+}
+
+main input:read-only {
+  background-color: var(--input-color);
 }

@@ -3,8 +3,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 export const Login = () => {
-  let [user] = useAuthState(auth);
-  const a = getAuth();
+  // let [user] = useAuthState(auth);
+  // const a = getAuth();
   const navigate = useNavigate();
 
   return (
@@ -20,10 +20,10 @@ export const Login = () => {
               const email = document.querySelector(".email").value;
               const password = document.querySelector(".password").value;
 
-              signInWithEmailAndPassword(a, email, password)
+              signInWithEmailAndPassword(getAuth(), email, password)
                 .then((userCredential) => {
                   // Signed in
-                  user = userCredential.user;
+                  const user = userCredential.user;
                   console.log(user);
                   // ...
                 })

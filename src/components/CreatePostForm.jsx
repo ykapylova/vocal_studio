@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../config/firebase.ts";
-import { useEffect } from "react";
 
 export const CreatePostForm = () => {
   // Используем хук useAuthState для получения данных о пользователе из Firebase Authentication

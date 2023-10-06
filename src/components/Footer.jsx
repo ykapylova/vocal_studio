@@ -16,7 +16,7 @@ export const Footer = () => {
           <div className="address">
             Республика Беларусь, г. Могилёв, <br /> ул. Первомайская, 34
           </div>
-          <div className="phone">+375(29)744-44-68</div>
+          <div className="phone">+375 (29) 744-44-68</div>
           <div className="email">tiptop_crystal@gmail.com</div>
         </div>
         <Nav />

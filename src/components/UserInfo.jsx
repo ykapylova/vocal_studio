@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-export const UserInfo = ({ user }) => {
+export const UserInfo = () => {
   const navigate = useNavigate();
   const auth = getAuth();
-  const [photoURL, setPhotoURL] = useState(user?.photoURL);
+  const [user] = useAuthState(auth);
 
-  useEffect(() => {
-    setPhotoURL(user?.photoURL);
-  }, [user]);
+  const handleSignOut = async () => {
+    await signOut(auth);
+    navigate("/");
+  };
 
   return user ? (
     <div className="navUserInfo">
       <div className="img-container">
-        <img src={photoURL} alt="" />
+        <img src={user.photoURL || ""} alt="" />
       </div>
 
       <div className="submenu">
-        <div>{user?.displayName ? user.displayName : user?.email}</div>
+        <div>{user.displayName || user.email}</div>
         <div>▼</div>
         <div className="submenu-buttons">
           <Link to="/chat">
-            <button className="chat-button">Общий чат</button>
+            <button>Общий чат</button>
           </Link>
           <Link to="/profile">
-            <button className="chat-button">Мой профиль</button>
+            <button>Мой профиль</button>
           </Link>
-          <button
-            onClick={async () => {
-              await signOut(auth);
-              navigate("/");
-            }}
-            className="logout-button"
-          >
+          {user.uid === "dCQj6kSxTTM4fEtMr50lHOgMcgz1" && (
+            <Link to="/admin">
+              <button>Добавить ученика</button>
+            </Link>
+          )}
+          <button onClick={handleSignOut} className="logout-button">
             Выйти из аккаунта
           </button>
         </div>
