@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 import { db, storage } from "../config/firebase.ts";
 import { getAuth, updateProfile } from "firebase/auth";
 
@@ -12,6 +19,13 @@ export const Profile = () => {
   const [userInfo, setUserInfo] = useState({});
 
   const usersRef = collection(db, "users");
+
+  const [groupsList, setGroupsList] = useState([]);
+  const groupsRef = collection(db, "groups");
+
+  const [group, setGroup] = useState("");
+
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -31,7 +45,24 @@ export const Profile = () => {
       };
       getUsers();
     }
-  }, [user]);
+
+    const unsubscribe = onSnapshot(query(groupsRef), (querySnapshot) => {
+      const groups = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setGroupsList(groups);
+    });
+
+    const foundGroup = groupsList.find((group) =>
+      group.names.includes(userInfo.displayName)
+    );
+    if (foundGroup) {
+      setGroup(foundGroup.id);
+    }
+
+    return () => unsubscribe();
+  }, [user, groupsRef]);
 
   const updateDisplayName = async () => {
     const nameInput = document.querySelector(".name");
@@ -61,6 +92,8 @@ export const Profile = () => {
   };
 
   const updatePhotoURL = async (event, operationType) => {
+    setLoader(true);
+    document.body.style.overflow = "hidden";
     try {
       let downloadURL = "";
       if (operationType === "update") {
@@ -72,7 +105,7 @@ export const Profile = () => {
           downloadURL = await getDownloadURL(storageRef);
         }
       }
-  
+
       await updateProfile(auth.currentUser, { photoURL: downloadURL });
       await updateDoc(
         doc(
@@ -81,9 +114,10 @@ export const Profile = () => {
         ),
         { photoURL: downloadURL }
       );
-  
+
       setUserInfo({ ...userInfo, photoURL: downloadURL });
       console.log("Изображение профиля успешно обновлено.");
+      setLoader(false);
       window.location.reload(false);
     } catch (error) {
       console.error("Ошибка при обновлении изображения профиля:", error);
@@ -94,8 +128,11 @@ export const Profile = () => {
     <main>
       <div></div>
       <div className="wrapper wrapperProfile">
+        <div className="loading" style={{ display: loader ? "flex" : "none" }}>
+          <img src="img/loading.gif" alt="loading..." />
+        </div>
         <div className="profile-image">
-          {userInfo.photoURL && <img src={userInfo.photoURL} alt="Profile" />}
+          {userInfo?.photoURL && <img src={userInfo?.photoURL} alt="Profile" />}
 
           <div className="new-image-setting">
             <label className="custom-file-upload">
@@ -109,8 +146,9 @@ export const Profile = () => {
             </label>
           </div>
 
-          <button onClick={(e) => updatePhotoURL(e, "delete")}>Удалить текущее изображение</button>
-          
+          <button onClick={(e) => updatePhotoURL(e, "delete")}>
+            Удалить текущее изображение
+          </button>
         </div>
 
         <div className="profile-settings">
@@ -119,7 +157,7 @@ export const Profile = () => {
             <div className="new-name-form">
               <input
                 type="text"
-                placeholder={userInfo.displayName || ""}
+                placeholder={userInfo?.displayName || ""}
                 className="name"
               />
               <button onClick={updateDisplayName}>Изменить имя</button>
@@ -136,18 +174,20 @@ export const Profile = () => {
               />
             </div>
           </div>
-          <div className="group-container">
-            <div>Группа</div>
-            <div className="new-name-form">
-              <input
-                type="text"
-                placeholder={userInfo.group ? userInfo.group : ""}
-                className="group"
-                readOnly
-              />
-              {/* <button onClick={updateGroup}>Изменить группу</button> */}
+          {group && (
+            <div className="group-container">
+              <div>Группа</div>
+              <div className="new-name-form">
+                <input
+                  type="text"
+                  placeholder={group}
+                  className="group"
+                  readOnly
+                />
+                {/* <button onClick={updateGroup}>Изменить группу</button> */}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div></div>

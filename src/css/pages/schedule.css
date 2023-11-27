@@ -1,27 +1,140 @@
-.schedule {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-bottom: black 1px solid;
-  margin: 3vh 0;
-  font-family: 'Caveat', cursive;
-  font-size: 1.5em;
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, calc(100% / 7));
+  grid-template-rows: 25px repeat(5, calc(55vw / 7));
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  margin-top: 20px;
 }
-.schedule .schedule-item {
-  display: flex;
-  height: 15vh;
+
+.calendar-grid > div {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  /* padding: 5px; */
+  overflow: auto;
 }
-.schedule .schedule-item .group-name,
-.schedule .schedule-item .group-time {
-  width: 50%;
-  border: black 1px solid;
-  border-bottom: none;
-  display: flex;
-  align-items: center;
-  padding-left: 5%;
+
+.wrapperSchedule .day .time {
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 3px;
 }
-.price {
-  margin-bottom: 3vh;
-  font-family: 'Caveat', cursive;
-  font-size: 1.5em;
+
+.wrapperSchedule .day .date {
+  padding-left: 2px;
+}
+
+.wrapperSchedule .day > div:first-child {
+  margin-bottom: 3px;
+}
+
+.wrapperSchedule .day > div:not(:first-child) {
+  position: relative;
+}
+
+.wrapperSchedule .constant-rehearsals .time {
+  background-color: rgba(161, 243, 37, 0.7);
+}
+.wrapperSchedule .additional-rehearsals .time {
+  background-color: rgba(255, 194, 11, 0.7);
+}
+.wrapperSchedule .concerts .time {
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+.wrapperSchedule .constant-rehearsals .time .place,
+.wrapperSchedule .additional-rehearsals .time .place,
+.wrapperSchedule .concerts .time .place {
+  /* display: none; */
+  background-color: rgb(255, 255, 187);
+  position: absolute;
+  right: 0px;
+  bottom: 50%;
+  width: 60%;
+  text-align: center;
+  font-size: 0.8em;
+  color: black;
+  border-radius: 10px;
+  border: 1px black solid;
+  display: none;
+}
+
+.wrapperSchedule .constant-rehearsals .time,
+.wrapperSchedule .additional-rehearsals .time,
+.wrapperSchedule .concerts .time {
+  position: relative; /* Относительное позиционирование */
+}
+
+.wrapperSchedule .constant-rehearsals .time::after,
+.wrapperSchedule .additional-rehearsals .time::after,
+.wrapperSchedule .concerts .time::after {
+  content: attr(data-tooltip); /* Выводим текст */
+  position: absolute; /* Абсолютное позиционирование */
+  right: 0;
+  bottom: 0; /* Положение подсказки */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Параметры тени */
+  opacity: 0; /* Подсказка невидима */
+  transition: 0.5s; /* Время появления подсказки */
+
+  background-color: black;
+
+  width: 60%;
+  text-align: center;
+  font-size: 0.8em;
+  color: white;
+  border-radius: 10px;
+  border: 1px black solid;
+}
+
+.wrapperSchedule .constant-rehearsals .time:hover::after,
+.wrapperSchedule .additional-rehearsals .time:hover::after,
+.wrapperSchedule .concerts .time:hover::after {
+  opacity: 1; /* Показываем подсказку */
+  bottom: 2em; /* Положение подсказки */
+}
+
+.wrapperSchedule .constant-rehearsals .time:hover .place,
+.wrapperSchedule .additional-rehearsals .time:hover .place,
+.wrapperSchedule .concerts .time:hover .place {
+  display: block;
+}
+
+.today {
+  /* box-shadow: 0 0 15px gray; */
+  background-color: rgb(173, 172, 172);
+  color: white;
+}
+
+.wrapperSchedule .meaning .constant-rehearsals,
+.wrapperSchedule .meaning .additional-rehearsals,
+.wrapperSchedule .meaning .concerts {
+  display: flex;
+  gap: 0.5vw;
+  /* width: 500px; */
+}
+
+.wrapperSchedule .meaning {
+  display: flex;
+  gap: 3vw;
+}
+
+.wrapperSchedule .meaning > div div:nth-child(2) {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.wrapperSchedule .constant-rehearsals > div:nth-child(2) {
+  background-color: rgba(161, 243, 37, 0.7);
+}
+
+.wrapperSchedule .additional-rehearsals > div:nth-child(2) {
+  background-color: rgba(255, 194, 11, 0.7);
+}
+
+.wrapperSchedule .concerts > div:nth-child(2) {
+  background-color: rgba(255, 0, 0, 0.7);
 }

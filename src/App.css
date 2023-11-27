@@ -1,6 +1,6 @@
 @font-face {
   font-family: Gilroy;
-  src: url("fonts/Gilroy-Light.otf");
+  src: url("fonts/Gilroy-Light.woff2");
 }
 
 @font-face {
@@ -9,9 +9,9 @@
 }
 
 :root {
-  --main-color: rgb(226, 167, 255);
-  --light-color: rgba(226, 167, 255, 0.532);
-  --input-color: rgba(241, 214, 255, 0.2);
+  --main-color: rgb(0, 0, 0);
+  --light-color: rgba(219, 162, 252, 0.532);
+  --input-color: rgba(236, 236, 236, 0.2);
 }
 
 body {

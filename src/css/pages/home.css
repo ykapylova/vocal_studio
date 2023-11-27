@@ -1,5 +1,6 @@
-.homeWrapper main a {
+.homeWrapper main .menu--item {
   color: black;
+  font-size: 0.8em;
 }
 
 .homeWrapper main {

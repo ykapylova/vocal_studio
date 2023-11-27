@@ -1,5 +1,3 @@
-import { auth } from "./../config/firebase.ts";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 export const Login = () => {

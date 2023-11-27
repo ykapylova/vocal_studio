@@ -28,9 +28,12 @@ export const UserInfo = () => {
           <Link to="/profile">
             <button>Мой профиль</button>
           </Link>
+          <Link to={user.uid === "dCQj6kSxTTM4fEtMr50lHOgMcgz1" ? "/schedule_admin" : "/schedule"}>
+            <button>Расписание</button>
+          </Link>
           {user.uid === "dCQj6kSxTTM4fEtMr50lHOgMcgz1" && (
             <Link to="/admin">
-              <button>Добавить ученика</button>
+              <button>Ученики</button>
             </Link>
           )}
           <button onClick={handleSignOut} className="logout-button">

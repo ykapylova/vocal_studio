@@ -14,6 +14,8 @@ import "./css/pages/profile.css";
 import "./css/pages/login.css";
 import "./css/pages/admin.css";
 import "./css/pages/chat.css";
+import "./css/pages/schedule.css";
+import "./css/pages/schedule_admin.css";
 import "./css/pages/404.css";
 
 import { Home } from "./pages/home";
@@ -27,6 +29,7 @@ import { News } from "./pages/news";
 import { Media } from "./pages/media";
 import { NotFound } from "./pages/404";
 import { Schedule } from "./pages/schedule";
+import { ScheduleAdmin } from "./pages/schedule_admin";
 import { Chat } from "./pages/chat";
 import { Login } from "./pages/login";
 import { Profile} from "./pages/profile";
@@ -43,6 +46,7 @@ function App() {
           <Route path="/media" element={<Media />} />
           <Route path="/news" element={<News />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/schedule_admin" element={<ScheduleAdmin />} />
           <Route path="/contacts" element={<Contact />} />
           <Route path="/team" element={<Team />} />
           <Route path="/chat" element={<Chat />} />

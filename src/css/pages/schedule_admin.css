@@ -1,0 +1,262 @@
+.wrapper.wrapperScheduleAdmin {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+}
+
+.wrapperScheduleAdmin .calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, calc(100% / 7));
+  grid-template-rows: 25px repeat(5, calc(55vw / 7));
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.wrapperScheduleAdmin .calendar-grid > div {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  overflow: auto;
+}
+
+.wrapperScheduleAdmin .day .info {
+  color: black;
+  padding: 10px;
+  padding-right: 15px;
+  border-radius: 10px;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 3px;
+  /* font-size: 0.7em; */
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.wrapperScheduleAdmin .day .date {
+  padding-left: 2px;
+}
+
+.wrapperScheduleAdmin .day > div:first-child {
+  margin-bottom: 3px;
+}
+
+.wrapperScheduleAdmin .day > div:not(:first-child) {
+  position: relative;
+}
+
+.wrapperScheduleAdmin .constant-rehearsals .info {
+  background-color: rgba(161, 243, 37, 0.7);
+}
+.wrapperScheduleAdmin .additional-rehearsals .info {
+  background-color: rgba(255, 194, 11, 0.7);
+}
+.wrapperScheduleAdmin .concerts .info {
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+.wrapperScheduleAdmin .constant-rehearsals .info .group,
+.wrapperScheduleAdmin .additional-rehearsals .info .group,
+.wrapperScheduleAdmin .concerts .info .group {
+  font-size: 0.7em;
+}
+
+.wrapperScheduleAdmin .constant-rehearsals .info .time,
+.wrapperScheduleAdmin .additional-rehearsals .info .time,
+.wrapperScheduleAdmin .concerts .info .time {
+  /* font-size: 0.8em; */
+}
+
+.wrapperScheduleAdmin .constant-rehearsals .info input,
+.wrapperScheduleAdmin .additional-rehearsals .info input,
+.wrapperScheduleAdmin .concerts .info input {
+  width: 20px;
+  height: 30px;
+  padding: 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 0.3em;
+  position: absolute;
+  top: -3px;
+  right: 2px;
+}
+
+.wrapperScheduleAdmin .constant-rehearsals .info .place,
+.wrapperScheduleAdmin .additional-rehearsals .info .place,
+.wrapperScheduleAdmin .concerts .info .place {
+  /* display: none; */
+  background-color: rgb(255, 255, 187);
+  position: absolute;
+  right: 0px;
+  bottom: 50%;
+  width: 60%;
+  text-align: center;
+  font-size: 0.8em;
+  color: black;
+  border-radius: 10px;
+  border: 1px black solid;
+  display: none;
+}
+
+.wrapperScheduleAdmin .constant-rehearsals .info,
+.wrapperScheduleAdmin .additional-rehearsals .info,
+.wrapperScheduleAdmin .concerts .info {
+  /* position: relative; */
+}
+
+/* .wrapperScheduleAdmin .constant-rehearsals .info::after,
+.wrapperScheduleAdmin .additional-rehearsals .info::after,
+.wrapperScheduleAdmin .concerts .info::after {
+  content: attr(data-tooltip); 
+  position: absolute; 
+  right: 20px;
+  bottom: 0; 
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+  opacity: 0; 
+  transition: 0.5s; 
+
+  background-color: black;
+
+  
+  padding: 0 5px;
+  text-align: center;
+  font-size: 0.8em;
+  color: white;
+  border-radius: 7px;
+  border: 1px black solid;
+} */
+
+/* .wrapperScheduleAdmin .constant-rehearsals .info:hover::after,
+.wrapperScheduleAdmin .additional-rehearsals .info:hover::after,
+.wrapperScheduleAdmin .concerts .info:hover::after {
+  opacity: 1;
+  bottom: 2em; 
+  z-index: 9999999999;
+} */
+
+/* .wrapperScheduleAdmin .constant-rehearsals .info:hover .place,
+.wrapperScheduleAdmin .additional-rehearsals .info:hover .place,
+.wrapperScheduleAdmin .concerts .info:hover .place {
+  display: block;
+} */
+
+.today {
+  /* box-shadow: 0 0 15px gray; */
+  background-color: rgb(173, 172, 172);
+  color: white;
+}
+
+.wrapperScheduleAdmin .meaning .constant-rehearsals,
+.wrapperScheduleAdmin .meaning .additional-rehearsals,
+.wrapperScheduleAdmin .meaning .concerts {
+  display: flex;
+  gap: 0.5vw;
+  /* width: 500px; */
+}
+
+.wrapperScheduleAdmin .meaning {
+  display: flex;
+  gap: 3vw;
+}
+
+.wrapperScheduleAdmin .meaning > div div:nth-child(2) {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.wrapperScheduleAdmin .meaning .constant-rehearsals > div:nth-child(2) {
+  background-color: rgba(161, 243, 37, 0.7);
+}
+
+.wrapperScheduleAdmin .meaning .additional-rehearsals > div:nth-child(2) {
+  background-color: rgba(255, 194, 11, 0.7);
+}
+
+.wrapperScheduleAdmin .meaning .concerts > div:nth-child(2) {
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+/* Добавление расписания */
+
+.wrapperScheduleAdmin form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wrapperScheduleAdmin input,
+.wrapperScheduleAdmin select {
+  width: 200px;
+  border: 1px solid var(--main-color);
+  outline: none;
+  background-color: white;
+  border-radius: 5px;
+  height: 50px;
+
+  padding: 0 10px;
+  color: var(--main-color);
+  font-family: Gilroy;
+  font-size: 1em;
+}
+
+.wrapperScheduleAdmin select {
+  width: 222px;
+  /* width: auto; */
+}
+
+.wrapperScheduleAdmin input::placeholder {
+  color: var(--light-color);
+  font-family: Gilroy;
+  font-size: 1em;
+}
+
+.wrapperScheduleAdmin button {
+  width: 222px;
+  height: 50px;
+}
+
+.wrapperScheduleAdmin .addSchedule {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.info-after {
+  animation: fade-in 0.5s ease-in-out forwards;
+
+  background-color: rgb(255, 255, 187);
+  text-align: center;
+  color: black;
+  border-radius: 10px;
+  border: 1px black solid;
+  /* box-sizing: border-box; */
+  /* display: none; */
+}
+
+.check-window {
+  width: 50%;
+  /* height: 200px; */
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 3px black solid;
+}
+
+.no-yes-container {
+  display: flex;
+  justify-content: space-around;
+}

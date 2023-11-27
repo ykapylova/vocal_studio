@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { db } from "../config/firebase.ts";
-import { collection, getDocs, query } from "firebase/firestore";
+import { usersRef } from "../config/firebase.ts";
+import { getDocs, query } from "firebase/firestore";
 
 export const Post = (props) => {
   const [usersList, setUsersList] = useState(null);
@@ -19,7 +19,6 @@ export const Post = (props) => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const usersRef = collection(db, "users");
       const querySnapshot = await getDocs(query(usersRef));
       const users = querySnapshot.docs.map((doc) => ({
         ...doc.data(),

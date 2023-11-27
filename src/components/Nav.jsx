@@ -10,8 +10,8 @@ const navItemsList = {
 export const Nav = () => {
   return (
     <div className="menu">
-      {Object.keys(navItemsList).map((key) => (
-        <Link to={"/" + key}>
+      {Object.keys(navItemsList).map((key, index) => (
+        <Link key={index} to={"/" + key}>
           <div className="menu--item">{navItemsList[key]}</div>
         </Link>
       ))}

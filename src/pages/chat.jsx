@@ -1,5 +1,5 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "./../config/firebase.ts";
+import { onSnapshot, orderBy, query } from "firebase/firestore";
+import { postsRef } from "./../config/firebase.ts";
 import { useEffect, useState } from "react";
 import { CreatePostForm } from "../components/CreatePostForm.jsx";
 import { Post } from "../components/Post.jsx";
@@ -7,16 +7,17 @@ import { Post } from "../components/Post.jsx";
 export const Chat = () => {
   const [postsList, setPostsList] = useState([]);
 
-  const postsRef = collection(db, "posts");
-
   useEffect(() => {
-    const unsubscribe = onSnapshot(query(postsRef, orderBy("time")), (querySnapshot) => {
-      const posts = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setPostsList(posts);
-    });
+    const unsubscribe = onSnapshot(
+      query(postsRef, orderBy("time")),
+      (querySnapshot) => {
+        const posts = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setPostsList(posts);
+      }
+    );
 
     return () => unsubscribe();
   }, [postsRef]);

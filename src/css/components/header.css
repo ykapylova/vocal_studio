@@ -11,6 +11,7 @@ header {
 
 header img.logo {
   height: 100%;
+  width: 10vh;
   border-radius: 50%;
 }
 
@@ -36,13 +37,11 @@ header .menu {
   gap: 10px;
   align-items: center;
   margin-left: 30px;
-  /* font-family: GilroyBold; */
 }
 
 .navUserInfo .img-container {
   width: 50px;
   height: 50px;
-  /* border-radius: 50%; */
   overflow: hidden;
 }
 
@@ -60,12 +59,16 @@ header .menu {
 .submenu-buttons {
   display: none;
   flex-direction: column;
+  align-items: flex-end;
 
   position: absolute;
   right: 5vw;
   z-index: 1000;
   top: 7vh;
-  padding-top: 2vh;
+  padding: 2vh 0;
+
+  width: 200px;
+  background-color: var(--main-color);
 }
 
 .signin-button {
@@ -80,14 +83,13 @@ header .menu {
 .schedule-button,
 .submenu-buttons button {
   justify-content: flex-end;
-  padding: 1vh 10px;
+  padding: 2vh 10px;
   outline: none;
-  background-color: var(--main-color);
   border: none;
   font-size: 1em;
   font-family: Gilroy;
   color: white;
-  width: 200px;
+  background-color: var(--main-color);
   height: 6vh;
   text-align: end;
   align-items: center;
@@ -97,10 +99,38 @@ header .menu {
   display: flex;
 }
 
+.submenu-buttons button {
+  transition: 0.5s;
+  position: relative;
+}
+
+.submenu-buttons button::after {
+  position: absolute;
+  content: "";
+  bottom: 2px;
+  right: 10px;
+  width: 90%;
+  height: 1px;
+  background: rgb(255, 255, 255);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+}
+
+.submenu-buttons button:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+
 .submenu:hover,
-.signin-button:hover,
-.logout-button:hover,
-.schedule-button:hover,
-.chat-button:hover {
+.submenu-buttons a,
+.submenu-buttons button {
   cursor: pointer;
+}
+
+
+.menu--item {
+  color: white;
+  font-size: 16px;
 }

@@ -6,9 +6,16 @@ import {
   signOut,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth, db } from "../config/firebase.ts";
-import React, { useState } from "react";
-import { Timestamp, addDoc, collection } from "firebase/firestore";
+import { auth, groupsRef, usersRef } from "../config/firebase.ts";
+import React, { useEffect, useState } from "react";
+import {
+  Timestamp,
+  addDoc,
+  doc,
+  onSnapshot,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 
 export const Admin = () => {
   let [user] = useAuthState(auth);
@@ -18,10 +25,26 @@ export const Admin = () => {
     navigate("/profile");
   }
 
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [group, setGroup] = useState("");
-  
+
+  // const [usersList, setUsersList] = useState([]);
+
+  const [groupsList, setGroupsList] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(query(groupsRef), (querySnapshot) => {
+      const groups = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setGroupsList(groups);
+    });
+
+    return () => unsubscribe();
+  }, [groupsRef]);
 
   const onCreateUser = async (e) => {
     e.preventDefault();
@@ -56,8 +79,6 @@ export const Admin = () => {
     }
   };
 
-  const usersRef = collection(db, "users");
-
   const onCreateUserDoc = async () => {
     await addDoc(usersRef, {
       displayName: name,
@@ -69,6 +90,30 @@ export const Admin = () => {
       group: group,
       photoURL: "",
     });
+
+    if (group) {
+
+      let group_obj = groupsList.find((groupDoc) => groupDoc.id === group).names
+      console.log(group_obj)
+
+      setGroup(group.trim());
+      try {
+        await updateDoc(doc(groupsRef, group), {
+          names: [...group_obj, name],
+        });
+        setGroupsList([...group_obj, name]);
+
+        console.log(`Пользователь успешно добавлен в группу "${group}".`);
+      } catch (error) {
+        console.error(
+          "Ошибка при добавлении пользователя",
+          user,
+          "в группу: ",
+          group
+        );
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -103,6 +148,26 @@ export const Admin = () => {
           <input type="date" required className="birthDate" />
           <button>Добавить пользователя</button>
         </form>
+        <p></p>
+        <div>
+          {groupsList.map((group) => {
+            return (
+              <div>
+                <div>
+                  <u>{group.id}</u>
+                </div>
+                {group.names.sort().map((name) => {
+                  return (
+                    <div>
+                      <div>{name}</div>
+                    </div>
+                  );
+                })}
+                <br />
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div></div>
     </main>

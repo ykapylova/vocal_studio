@@ -11,7 +11,7 @@ export const Footer = () => {
         <div className="contacts">
           <div className="name">
             Образцовая шоу-группа "Тип-топ" <br /> и эстрадная студия
-            вокала"Crystal"
+            вокала "Crystal"
           </div>
           <div className="address">
             Республика Беларусь, г. Могилёв, <br /> ул. Первомайская, 34
