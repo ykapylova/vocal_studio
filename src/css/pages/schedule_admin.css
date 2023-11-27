@@ -32,6 +32,16 @@
   align-items: center;
 }
 
+.wrapperScheduleAdmin .constant-rehearsals .info {
+  background-color: rgba(161, 243, 37, 0.7);
+}
+.wrapperScheduleAdmin .additional-rehearsals .info {
+  background-color: rgba(255, 194, 11, 0.7);
+}
+.wrapperScheduleAdmin .concerts .info {
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
 .wrapperScheduleAdmin .day .date {
   padding-left: 2px;
 }
@@ -44,26 +54,16 @@
   position: relative;
 }
 
-.wrapperScheduleAdmin .constant-rehearsals .info {
-  background-color: rgba(161, 243, 37, 0.7);
-}
-.wrapperScheduleAdmin .additional-rehearsals .info {
-  background-color: rgba(255, 194, 11, 0.7);
-}
-.wrapperScheduleAdmin .concerts .info {
-  background-color: rgba(255, 0, 0, 0.7);
-}
-
 .wrapperScheduleAdmin .constant-rehearsals .info .group,
 .wrapperScheduleAdmin .additional-rehearsals .info .group,
 .wrapperScheduleAdmin .concerts .info .group {
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
-.wrapperScheduleAdmin .constant-rehearsals .info .time,
-.wrapperScheduleAdmin .additional-rehearsals .info .time,
-.wrapperScheduleAdmin .concerts .info .time {
-  /* font-size: 0.8em; */
+.wrapperScheduleAdmin .constant-rehearsals .info .type,
+.wrapperScheduleAdmin .additional-rehearsals .info .type,
+.wrapperScheduleAdmin .concerts .info .type {
+  font-size: 0.7em;
 }
 
 .wrapperScheduleAdmin .constant-rehearsals .info input,
@@ -97,48 +97,6 @@
   border: 1px black solid;
   display: none;
 }
-
-.wrapperScheduleAdmin .constant-rehearsals .info,
-.wrapperScheduleAdmin .additional-rehearsals .info,
-.wrapperScheduleAdmin .concerts .info {
-  /* position: relative; */
-}
-
-/* .wrapperScheduleAdmin .constant-rehearsals .info::after,
-.wrapperScheduleAdmin .additional-rehearsals .info::after,
-.wrapperScheduleAdmin .concerts .info::after {
-  content: attr(data-tooltip); 
-  position: absolute; 
-  right: 20px;
-  bottom: 0; 
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
-  opacity: 0; 
-  transition: 0.5s; 
-
-  background-color: black;
-
-  
-  padding: 0 5px;
-  text-align: center;
-  font-size: 0.8em;
-  color: white;
-  border-radius: 7px;
-  border: 1px black solid;
-} */
-
-/* .wrapperScheduleAdmin .constant-rehearsals .info:hover::after,
-.wrapperScheduleAdmin .additional-rehearsals .info:hover::after,
-.wrapperScheduleAdmin .concerts .info:hover::after {
-  opacity: 1;
-  bottom: 2em; 
-  z-index: 9999999999;
-} */
-
-/* .wrapperScheduleAdmin .constant-rehearsals .info:hover .place,
-.wrapperScheduleAdmin .additional-rehearsals .info:hover .place,
-.wrapperScheduleAdmin .concerts .info:hover .place {
-  display: block;
-} */
 
 .today {
   /* box-shadow: 0 0 15px gray; */
@@ -223,40 +181,35 @@
   justify-content: space-between;
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.info-after {
-  animation: fade-in 0.5s ease-in-out forwards;
-
-  background-color: rgb(255, 255, 187);
-  text-align: center;
-  color: black;
-  border-radius: 10px;
-  border: 1px black solid;
-  /* box-sizing: border-box; */
-  /* display: none; */
-}
-
 .check-window {
-  width: 50%;
+  width: 40%;
   /* height: 200px; */
   padding: 20px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
   border: 3px black solid;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.no-yes-container {
-  display: flex;
-  justify-content: space-around;
+.no {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.yes {
+  text-align: center;
+  border: 2px red solid;
+  color: red;
+  width: 100px;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 5px;
 }

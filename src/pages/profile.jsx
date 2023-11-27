@@ -61,6 +61,8 @@ export const Profile = () => {
       setGroup(foundGroup.id);
     }
 
+    
+
     return () => unsubscribe();
   }, [user, groupsRef]);
 

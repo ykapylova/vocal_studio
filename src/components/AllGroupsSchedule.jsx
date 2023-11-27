@@ -109,64 +109,15 @@ export const AllGroupsSchedule = () => {
                   month + 1 === Number(item[4].slice(3, 5))) ||
                 weekdays[weekDayIndex] === item[4]
               ) {
-
-                let infoAfter = document.createElement("div");
-
-                const infoBox = (event) => {
-                  try {
-                    const rect =
-                      event.target.className == "info"
-                        ? event.target.getBoundingClientRect()
-                        : event.target.parentNode.getBoundingClientRect();
-
-                    infoAfter.innerHTML = item[1];
-
-                    const calenderGrid = document
-                      .querySelector(".calendar-grid")
-                      .getBoundingClientRect();
-                    console.log(calenderGrid.width);
-
-                    infoAfter.style.position = "absolute";
-                    infoAfter.style.opacity = "0";
-                    infoAfter.style.width = calenderGrid.width / 7 - 10 + "px";
-                    infoAfter.style.display = "block";
-                    document.body.appendChild(infoAfter);
-                    infoAfter.classList.add("info-after");
-
-                    const infoAfterElem = document
-                      .querySelector(".info-after")
-                      .getBoundingClientRect();
-
-                    infoAfter.style.top =
-                      rect.top - infoAfterElem.height - 3 + "px";
-                    infoAfter.style.left = rect.left + "px";
-                  } catch (err) {
-                    console.log();
-                  }
-
-                  // Показываем элемент
-                };
-
-                const infoBoxRemove = () => {
-                  if (infoAfter) {
-                    try {
-                      document.body.removeChild(infoAfter);
-                    } catch (err) {
-                      console.log(err);
-                    }
-                  }
-                };
-
                 return (
                   <div className={item[3]} key={index}>
-                    <div
-                      className="info"
-                      // data-tooltip={item[1]}
-                      onMouseOver={infoBox}
-                      onMouseLeave={infoBoxRemove}
-                    >
-                      <span className="time">{item[0]}</span>{" "}
-                      <span className="group">{item[2]}</span>
+                    <div className="info">
+                      <div className="time">{item[0]}</div>
+                      <div className="infoBox">
+                        <div className="group"> {item[2]}</div>
+                        <div className="type">{item[1]}</div>
+                      </div>
+
                       <input
                         type="button"
                         value="❌"
@@ -195,32 +146,32 @@ export const AllGroupsSchedule = () => {
   const checkBeforeDelete = (groupName, type, date, time) => {
     let typeText;
     switch (type) {
-      case 'Концерты':
+      case "Концерты":
         typeText = "концерт";
         break;
-      case 'Постоянные репетиции':
+      case "Постоянные репетиции":
         typeText = "постоянные репетиции";
         break;
-      case 'Дополнительные репетиции':
+      case "Дополнительные репетиции":
         typeText = "дополнительную репетицию";
         break;
     }
     let checkWindow = document.createElement("div");
     checkWindow.classList.add("check-window");
-    checkWindow.innerHTML = `<div>Вы точно хотите удалить ${typeText}: <br>${date.slice(0,3)+date.slice(3,5)} в ${time} для ${groupName}?</div>
-                             <div class="no-yes-container">
-                               <div class="no">❌</div>
-                               <div class="yes">✅</div>
-                             </div>`;
+    checkWindow.innerHTML = `<div>Вы точно хотите удалить ${typeText}: <br>${
+      date.slice(0, 3) + date.slice(3, 5)
+    } в ${time} для ${groupName}?</div>
+    <div class="no">❌</div>
+    <div class="yes">Удалить</div>`;
 
-    document.body.appendChild(checkWindow);
+    document.body.querySelector(".App").appendChild(checkWindow);
 
     document.querySelector(".no").addEventListener("click", () => {
-      document.body.removeChild(checkWindow);
+      document.body.querySelector(".App").removeChild(checkWindow);
     });
 
     document.querySelector(".yes").addEventListener("click", () => {
-      document.body.removeChild(checkWindow);
+      document.body.querySelector(".App").removeChild(checkWindow);
       deleteEvent(groupName, type, date);
     });
   };

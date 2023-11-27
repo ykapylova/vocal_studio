@@ -11,7 +11,7 @@ export const ScheduleAdmin = () => {
   let [user] = useAuthState(auth);
   const navigate = useNavigate();
 
-  if (user?.uid !== "dCQj6kSxTTM4fEtMr50lHOgMcgz1") {
+  if (user?.uid !== "dCQj6kSxTTM4fEtMr50lHOgMcgz1" && user?.uid !== "4dYnQlIMX6YbbHNSDmZ7HO5yDAw2") {
     navigate("/profile");
   }
 

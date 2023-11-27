@@ -4,7 +4,7 @@ import { doc, getDocs, onSnapshot, query, updateDoc } from "firebase/firestore";
 
 export const AddScheduleEvent = () => {
   const [place, setPlace] = useState("");
-  const [note, setNote] = useState("");
+  // const [note, setNote] = useState("");
   const [group, setGroup] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -44,7 +44,7 @@ export const AddScheduleEvent = () => {
       const foundGroup = groups.find((group) => group.id == groupName);
       if (!foundGroup["schedule"][type][newDate]) {
         await updateDoc(doc(groupsRef, groupName), {
-          [`schedule.${type}.${newDate}`]: time + " - " + place + "Важно:\n" + note,
+          [`schedule.${type}.${newDate}`]: time + " - " + place,
         });
         console.log(`Событие успешно добавлено`);
         console.log(foundGroup["schedule"][type]);
@@ -157,13 +157,13 @@ export const AddScheduleEvent = () => {
         className="place"
       />
 
-      <div>Заметка</div>
+      {/* <div>Заметка</div>
       <input
         type="text"
         value={note}
         onChange={(e) => setNote(e.target.value)}
         className="note"
-      />
+      /> */}
 
       <br />
       <button>Добавить cобытие</button>

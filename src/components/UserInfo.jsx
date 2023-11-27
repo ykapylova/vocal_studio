@@ -28,10 +28,10 @@ export const UserInfo = () => {
           <Link to="/profile">
             <button>Мой профиль</button>
           </Link>
-          <Link to={user.uid === "dCQj6kSxTTM4fEtMr50lHOgMcgz1" ? "/schedule_admin" : "/schedule"}>
+          <Link to={(user?.uid === "dCQj6kSxTTM4fEtMr50lHOgMcgz1" && user?.uid === "4dYnQlIMX6YbbHNSDmZ7HO5yDAw2") ? "/schedule_admin" : "/schedule"}>
             <button>Расписание</button>
           </Link>
-          {user.uid === "dCQj6kSxTTM4fEtMr50lHOgMcgz1" && (
+          {(user.uid === "dCQj6kSxTTM4fEtMr50lHOgMcgz1" && user?.uid === "4dYnQlIMX6YbbHNSDmZ7HO5yDAw2") && (
             <Link to="/admin">
               <button>Ученики</button>
             </Link>
