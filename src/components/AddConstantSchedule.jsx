@@ -50,7 +50,7 @@ export const AddConstantSchedule = () => {
 
   return (
     <form onSubmit={createSchedule} className="addConstantSchedule">
-      <h2>Добавить постоянное расписание</h2>
+      <h2>Добавить постоянное <br /> расписание</h2>
 
       <div>Группа</div>
       <select

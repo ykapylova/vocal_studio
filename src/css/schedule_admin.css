@@ -238,7 +238,7 @@ body {
 .App main div.wrapperScheduleAdmin .addSchedule {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 20px;
 }
 @media screen and (max-width: 860px) {
