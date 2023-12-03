@@ -1,0 +1,208 @@
+@charset "UTF-8";
+@font-face {
+  font-family: Gilroy;
+  src: url("./../fonts/Gilroy-Light.woff2");
+}
+@font-face {
+  font-family: GilroyBold;
+  src: url("./../fonts/Gilroy-ExtraBold.otf");
+}
+:root {
+  --main-color: rgb(0, 0, 0);
+  --light-color: rgba(219, 162, 252, 0.532);
+  --input-color: rgba(236, 236, 236, 0.2);
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  font-family: Gilroy, sans-serif !important;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  font-size: 1.2em;
+}
+@media screen and (max-width: 430px) {
+  .App {
+    font-size: 1em;
+  }
+}
+.App input,
+.App select,
+.App button {
+  font-family: Gilroy, sans-serif !important;
+}
+.App main {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-height: 55vh;
+}
+@media screen and (max-width: 1050px) {
+  .App main {
+    min-height: calc(100vh - (38vh + 50px));
+    margin-top: 12vh;
+  }
+}
+.App main .wrapper {
+  width: 70vw;
+  gap: 20px;
+}
+@media screen and (max-width: 1050px) {
+  .App main .wrapper {
+    width: 90vw;
+  }
+}
+.App a {
+  color: white;
+  text-decoration: none;
+}
+.App a.active {
+  color: rgba(255, 255, 255, 0.747);
+}
+
+header .menu .menu--item {
+  position: relative;
+  display: block;
+  padding: 4px 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+header .menu .menu--item::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgb(255, 255, 255);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+}
+header .menu .menu--item:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+header {
+  width: 90vw;
+  padding: 1vh 5vw;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--main-color);
+  color: white;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 1050px) {
+  header {
+    display: none;
+  }
+}
+header img.logo {
+  height: 100%;
+  width: 10vh;
+  border-radius: 50%;
+}
+header .menu {
+  width: 60%;
+  display: flex;
+  font-weight: bold;
+  justify-content: flex-end;
+  gap: 60px;
+  align-items: center;
+}
+@media screen and (max-width: 1050px) {
+  header .menu {
+    flex-direction: column;
+    display: none;
+    z-index: 10000;
+  }
+}
+header .menu .menu--item {
+  color: white;
+  font-size: 16px;
+}
+
+/* блок с юзером */
+.navUserInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+  margin-left: 30px;
+  cursor: pointer;
+}
+.navUserInfo .img-container {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+.navUserInfo .img-container img {
+  height: 100%;
+}
+
+.submenu {
+  display: flex;
+  gap: 5px;
+  width: 200px;
+  justify-content: flex-end;
+}
+.submenu .submenu-buttons {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  right: 5vw;
+  z-index: 1000;
+  top: 7vh;
+  padding: 2vh 0;
+  width: 200px;
+  background-color: var(--main-color);
+}
+.submenu .submenu-buttons button {
+  justify-content: flex-end;
+  padding: 2vh 10px;
+  outline: none;
+  border: none;
+  font-size: 1em;
+  font-family: Gilroy;
+  color: white;
+  background-color: var(--main-color);
+  height: 6vh;
+  text-align: end;
+  align-items: center;
+  transition: 0.5s;
+  cursor: pointer;
+  position: relative;
+}
+.submenu .submenu-buttons button::after {
+  position: absolute;
+  content: "";
+  bottom: 2px;
+  right: 10px;
+  width: 90%;
+  height: 1px;
+  background: rgb(255, 255, 255);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+}
+.submenu .submenu-buttons button:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.submenu:hover .submenu-buttons {
+  display: flex;
+}
+
+/*# sourceMappingURL=header.css.map */

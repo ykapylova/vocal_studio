@@ -30,7 +30,6 @@ export const Profile = () => {
   useEffect(() => {
     if (user) {
       const getUsers = async () => {
-        const usersRef = collection(db, "users");
         try {
           const querySnapshot = await getDocs(usersRef);
           const users = querySnapshot.docs.map((doc) => ({
@@ -55,7 +54,7 @@ export const Profile = () => {
     });
 
     const foundGroup = groupsList.find((group) =>
-      group.names.includes(userInfo.displayName)
+      group.names.includes(userInfo?.displayName)
     );
     if (foundGroup) {
       setGroup(foundGroup.id);
@@ -155,7 +154,7 @@ export const Profile = () => {
 
         <div className="profile-settings">
           <div className="name-container">
-            <div>Имя пользователя</div>
+            <div>Имя пользователя:</div>
             <div className="new-name-form">
               <input
                 type="text"
@@ -165,17 +164,19 @@ export const Profile = () => {
               <button onClick={updateDisplayName}>Изменить имя</button>
             </div>
           </div>
-          <div className="email-container">
-            <div>E-mail</div>
+
+          <div className="nickname-container">
+            <div>Данные для входа:</div>
             <div className="new-name-form">
               <input
                 type="text"
-                placeholder={user?.email}
-                className="email"
+                placeholder={userInfo?.nickname}
+                className="nickname"
                 readOnly
               />
             </div>
           </div>
+
           {group && (
             <div className="group-container">
               <div>Группа</div>

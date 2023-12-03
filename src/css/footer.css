@@ -1,0 +1,65 @@
+footer {
+  height: 25vh;
+  width: 100vw;
+  padding: 4vh 0;
+  display: flex;
+  justify-content: center;
+  background-color: var(--main-color);
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+@media screen and (max-width: 1050px) {
+  footer {
+    font-size: 0.7em;
+    height: 18vh;
+    margin-bottom: 55px;
+  }
+}
+footer .menu, footer .contacts {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+}
+footer .container {
+  width: 70vw;
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (max-width: 1050px) {
+  footer .container {
+    width: 90vw;
+  }
+}
+footer .contacts {
+  align-items: start;
+}
+@media screen and (max-width: 1050px) {
+  footer .contacts {
+    width: 65%;
+  }
+}
+@media screen and (max-width: 430px) {
+  footer .contacts {
+    width: 100%;
+  }
+}
+footer .menu {
+  align-items: end;
+}
+@media screen and (max-width: 1050px) {
+  footer .menu {
+    width: 35%;
+  }
+}
+@media screen and (max-width: 430px) {
+  footer .menu {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=footer.css.map */

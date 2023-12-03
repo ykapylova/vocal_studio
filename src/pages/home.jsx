@@ -3,16 +3,13 @@ import { Nav } from "../components/Nav";
 
 export const Home = () => {
   return (
-    <div className="homeWrapper">
-      <header>
-        <Link to={"/login"}>Вход</Link>
-      </header>
-      <main>
+    <main>
+      <div className="homeWrapper">
         <Nav />
         <div className="logo">
           <img src="logo.jpg" alt="Logo" />
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 };

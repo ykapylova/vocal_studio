@@ -109,8 +109,7 @@ export const AddConstantSchedule = () => {
         <option value="Вокал">Вокал</option>;
         <option value="Хореография">Хореография</option>;
       </select>
-
-      <br />
+      
       <button>Добавить расписание</button>
     </form>
   );

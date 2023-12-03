@@ -164,8 +164,7 @@ export const AddScheduleEvent = () => {
         onChange={(e) => setNote(e.target.value)}
         className="note"
       /> */}
-
-      <br />
+      
       <button>Добавить cобытие</button>
     </form>
   );

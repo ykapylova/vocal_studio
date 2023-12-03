@@ -1,5 +1,5 @@
 import { useAuthState } from "react-firebase-hooks/auth";
-import { createElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { doc, getDocs, updateDoc } from "firebase/firestore";
 import { auth, groupsRef, usersRef } from "../config/firebase.ts";
 import {
@@ -7,7 +7,6 @@ import {
   getDaysInMonth,
   getFirstDayOfMonth,
 } from "./getDaysInMonth.js";
-import { CheckBeforeDeleteWindow } from "./CheckBeforeDeleteWindow.jsx";
 
 export const AllGroupsSchedule = () => {
   let [user] = useAuthState(auth);
@@ -49,6 +48,7 @@ export const AllGroupsSchedule = () => {
 
     for (let day = 1; day < firstDayOfWeek; day++) {
       calendar.push(<div key={day - firstDayOfWeek}></div>);
+
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
@@ -94,11 +94,13 @@ export const AllGroupsSchedule = () => {
     });
     allEvents = allEvents.sort();
 
+    console.log(allEvents)
+
     let newCalendar = calendar.map((dayElement, index) => {
       const weekDayIndex = (index + 1) % 7;
 
       return (
-        <div key={dayElement.key} className="day">
+        <div key={dayElement.key} className={dayElement.key < 0 ? "empty" : "day"}>
           {dayElement}
 
           {allEvents.map((item, index) => {
@@ -107,7 +109,7 @@ export const AllGroupsSchedule = () => {
                 ((item[4].slice(0, 2) === String(+dayElement.key + 1) ||
                   item[4].slice(0, 2) === "0" + String(+dayElement.key + 1)) &&
                   month + 1 === Number(item[4].slice(3, 5))) ||
-                weekdays[weekDayIndex] === item[4]
+                weekdays[weekDayIndex] === item[4].slice(0, 2)
               ) {
                 return (
                   <div className={item[3]} key={index}>
@@ -115,7 +117,7 @@ export const AllGroupsSchedule = () => {
                       <div className="time">{item[0]}</div>
                       <div className="infoBox">
                         <div className="group"> {item[2]}</div>
-                        <div className="type">{item[1]}</div>
+                        <div className="place">{item[1]}</div>
                       </div>
 
                       <input
@@ -164,14 +166,14 @@ export const AllGroupsSchedule = () => {
     <div class="no">❌</div>
     <div class="yes">Удалить</div>`;
 
-    document.body.querySelector(".App").appendChild(checkWindow);
+    document.body.querySelector(".wrapperScheduleAdmin").appendChild(checkWindow);
 
     document.querySelector(".no").addEventListener("click", () => {
-      document.body.querySelector(".App").removeChild(checkWindow);
+      document.body.querySelector(".wrapperScheduleAdmin").removeChild(checkWindow);
     });
 
     document.querySelector(".yes").addEventListener("click", () => {
-      document.body.querySelector(".App").removeChild(checkWindow);
+      document.body.querySelector(".wrapperScheduleAdmin").removeChild(checkWindow);
       deleteEvent(groupName, type, date);
     });
   };

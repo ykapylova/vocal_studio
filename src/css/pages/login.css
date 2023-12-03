@@ -1,17 +1,41 @@
-.wrapperLogin form {
+/* .signin-button form {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   gap: 10px;
+} */
+
+.signin-button {
+  position: relative;
+  width: 200px;
 }
 
-.wrapperLogin input {
-  width: 300px;
+.signin-button form {
+  display: none;
+  flex-direction: column;
+  /* align-items: center; */
+
+  position: absolute;
+  right: -5vw;
+  z-index: 1000;
+  top: 5vh;
+  padding: 2vh 10px;
+
+  width: 250px;
+  background-color: var(--main-color);
+}
+
+.signin-button:hover form {
+  display: flex;
+}
+
+.signin-button input {
+  width: 200px;
+  height: 50px;
   border: 1px solid var(--main-color);
   outline: none;
   background-color: white;
   border-radius: 5px;
-  height: 50px;
 
   padding: 0 10px;
   color: var(--main-color);
@@ -19,14 +43,23 @@
   font-size: 1em;
 }
 
-.wrapperLogin input::placeholder {
+.signin-button input::placeholder {
   color: var(--light-color);
   font-family: Gilroy;
   font-size: 1em;
 }
 
 
-.wrapperLogin button {
+.signin-button button {
   width: 120px;
   height: 50px;
+  border: 1px solid var(--main-color);
+  outline: none;
+  background-color: white;
+  border-radius: 5px;
+
+  padding: 0 10px;
+  color: var(--main-color);
+  font-family: Gilroy;
+  font-size: 1em;
 }

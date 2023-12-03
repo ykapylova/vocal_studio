@@ -2,7 +2,7 @@ import { getAuth } from "firebase/auth";
 import { Banner } from "../components/Banner";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
-import { getDocs} from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 import { groupsRef, usersRef } from "../config/firebase.ts";
 import {
   getCurrentDateInfo,
@@ -17,7 +17,6 @@ export const Schedule = () => {
   const [group, setGroup] = useState("");
 
   useEffect(() => {
-
     const getGroup = async () => {
       if (user) {
         try {
@@ -70,14 +69,14 @@ export const Schedule = () => {
 
     weekdays2.forEach((weekDay) => {
       calendar.push(
-        <div key={i++} align="center">
+        <div key={i++} className="empty">
           {weekDay}
         </div>
       );
     });
 
     for (let day = 1; day < firstDayOfWeek; day++) {
-      calendar.push(<div key={day - firstDayOfWeek}></div>);
+      calendar.push(<div key={day - firstDayOfWeek} className="empty"></div>);
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
@@ -89,43 +88,56 @@ export const Schedule = () => {
 
           {weekdaysForVocal.includes(weekdays[weekDayIndex % 7]) && (
             <div className="constant-rehearsals">
-              <div
-                className="time"
-                data-tooltip={group.schedule["Постоянные репетиции"][
-                  weekdays2[(weekDayIndex - 1) % 7]
-                ].slice(8)}
-              >
-                {group.schedule["Постоянные репетиции"][
-                  weekdays2[(weekDayIndex - 1) % 7]
-                ].slice(0, 5)}
+              <div className="info">
+                <div className="time">
+                  {group.schedule["Постоянные репетиции"][
+                    weekdays2[(weekDayIndex - 1) % 7]
+                  ].slice(0, 5)}
+                </div>
+                <div className="infoBox">
+                  <div className="place">
+                    {group.schedule["Постоянные репетиции"][
+                      weekdays2[(weekDayIndex - 1) % 7]
+                    ].slice(8)}
+                  </div>
+                </div>
               </div>
             </div>
           )}
 
-          {weekdaysForVocalAdd.includes(`${day}.${month + 1}`) && (
+          {weekdaysForVocalAdd.includes(`${day}-${month + 1}`) && (
             <div className="additional-rehearsals">
-              <div
-                className="time"
-                data-tooltip={group.schedule["Дополнительные репетиции"][
-                  `${day}.${month + 1}`
-                ].slice(8)}
-              >
-                {group.schedule["Дополнительные репетиции"][
-                  `${day}.${month + 1}`
-                ].slice(0, 5)}
+              <div className="info">
+                <div className="time">
+                  {group.schedule["Дополнительные репетиции"][
+                    `${day}-${month + 1}`
+                  ].slice(0, 5)}
+                </div>
+                <div className="infoBox">
+                  <div className="place">
+                    {group.schedule["Дополнительные репетиции"][
+                      `${day}-${month + 1}`
+                    ].slice(8)}
+                  </div>
+                </div>
               </div>
             </div>
           )}
 
-          {concerts.includes(`${day}.${month + 1}`) && (
+          {concerts.includes(`${day}-${month + 1}`) && (
             <div className="concerts">
-              <div
-                className="time"
-                data-tooltip={group.schedule["Концерты"][
-                  `${day}.${month + 1}`
-                ].slice(8)}
-              >
-                {group.schedule["Концерты"][`${day}.${month + 1}`].slice(0, 5)}
+              <div className="info">
+                <div className="time">
+                  {group.schedule["Концерты"][`${day}-${month + 1}`].slice(
+                    0,
+                    5
+                  )}
+                </div>
+                <div className="infoBox">
+                  <div className="place">
+                    {group.schedule["Концерты"][`${day}-${month + 1}`].slice(8)}
+                  </div>
+                </div>
               </div>
             </div>
           )}

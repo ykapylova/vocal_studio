@@ -1,0 +1,68 @@
+%icons-sides {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  bottom: 2vh;
+  gap: 0.3em;
+
+  @media screen and (max-width: 1050px) {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+  bottom: 0;
+
+  }
+}
+
+
+
+.icons {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+
+  @media screen and (max-width: 1050px) {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    background-color: white;
+
+    gap: 10px;
+  }
+
+  .phone {
+    @extend %icons-sides;
+    left: 2vh;
+    @media screen and (max-width: 1050px) {
+      left: auto;
+      right: auto;
+      // bottom: 0;
+      top: auto;
+    }
+  }
+
+  .chats {
+    @extend %icons-sides;
+    right: 2vh;
+    @media screen and (max-width: 1050px) {
+      left: auto;
+      right: auto;
+      bottom: 0;
+      top: auto;
+    }
+  }
+
+  .chats,
+  .phone {
+    div img {
+      height: 50px;
+    }
+  }
+
+  .icon:hover img {
+    transform: scale(1.1);
+    transition: 0.3s;
+  }
+}

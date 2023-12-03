@@ -1,0 +1,13 @@
+@import 'App';
+
+.wrapperMedia {
+  @extend %grid-with-pictures;
+
+  iframe {
+    width: 100%;
+  }
+
+  .card:hover img {
+    transform: scale(1.2);
+  }
+}

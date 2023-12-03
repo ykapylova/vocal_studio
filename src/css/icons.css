@@ -1,0 +1,62 @@
+.icons .chats, .icons .phone {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  bottom: 2vh;
+  gap: 0.3em;
+}
+@media screen and (max-width: 1050px) {
+  .icons .chats, .icons .phone {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    bottom: 0;
+  }
+}
+
+.icons {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+@media screen and (max-width: 1050px) {
+  .icons {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    background-color: white;
+    gap: 10px;
+  }
+}
+.icons .phone {
+  left: 2vh;
+}
+@media screen and (max-width: 1050px) {
+  .icons .phone {
+    left: auto;
+    right: auto;
+    top: auto;
+  }
+}
+.icons .chats {
+  right: 2vh;
+}
+@media screen and (max-width: 1050px) {
+  .icons .chats {
+    left: auto;
+    right: auto;
+    bottom: 0;
+    top: auto;
+  }
+}
+.icons .chats div img,
+.icons .phone div img {
+  height: 50px;
+}
+.icons .icon:hover img {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+/*# sourceMappingURL=icons.css.map */

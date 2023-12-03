@@ -3,9 +3,9 @@ import { Nav } from "./Nav";
 import { UserInfo } from "./UserInfo";
 
 export const Header = () => {
-  if (useLocation().pathname == "/") {
-    return null
-  }
+  // if (useLocation().pathname == "/") {
+  //   return null
+  // }
   return (
     <header>
       <Link to="/" onClick={window.location.reload}>

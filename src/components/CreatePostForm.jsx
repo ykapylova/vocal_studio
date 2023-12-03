@@ -36,7 +36,7 @@ export const CreatePostForm = () => {
   return (
     <form onSubmit={handleSubmitForm}>
       <textarea placeholder="Напишите сообщение" {...register("text")} />
-      <input type="submit" value="Отправить" />
+      <button>Отправить</button>
     </form>
   );
 };

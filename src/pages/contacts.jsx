@@ -20,7 +20,7 @@ export const Contact = () => {
               <b>Как с нами связаться?</b>
             </p>
             <a href="tel:375297444468">
-              <div className="text">📞 +375 (29) 744-44-68</div>
+              <div>📞 +375 (29) 744-44-68</div>
             </a>
           </div>
           <iframe

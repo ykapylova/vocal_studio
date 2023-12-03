@@ -27,3 +27,5 @@ export const groupsRef = collection(db, "groups");
 export const usersRef = collection(db, "users");
 export const postsRef = collection(db, "posts");
 
+export const admin = "yg7jvluctOXOgPAobvUmrGBQ4tU2"
+

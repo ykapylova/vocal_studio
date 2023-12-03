@@ -1,6 +1,8 @@
 import { getAuth, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Login } from "./Login";
+import { admin } from "../config/firebase.ts";
 
 export const UserInfo = () => {
   const navigate = useNavigate();
@@ -11,6 +13,8 @@ export const UserInfo = () => {
     await signOut(auth);
     navigate("/");
   };
+
+  // console.log(user.uid)
 
   return user ? (
     <div className="navUserInfo">
@@ -23,28 +27,38 @@ export const UserInfo = () => {
         <div>▼</div>
         <div className="submenu-buttons">
           <Link to="/chat">
-            <button>Общий чат</button>
+            <button>Чат</button>
           </Link>
           <Link to="/profile">
-            <button>Мой профиль</button>
+            <button>Профиль</button>
           </Link>
-          <Link to={(user?.uid === "dCQj6kSxTTM4fEtMr50lHOgMcgz1" && user?.uid === "4dYnQlIMX6YbbHNSDmZ7HO5yDAw2") ? "/schedule_admin" : "/schedule"}>
+          <Link
+            to={
+              user.uid === admin
+                ? "/schedule_admin"
+                : "/schedule"
+            }
+          >
             <button>Расписание</button>
           </Link>
-          {(user.uid === "dCQj6kSxTTM4fEtMr50lHOgMcgz1" && user?.uid === "4dYnQlIMX6YbbHNSDmZ7HO5yDAw2") && (
+          {user.uid === admin && (
             <Link to="/admin">
               <button>Ученики</button>
             </Link>
           )}
           <button onClick={handleSignOut} className="logout-button">
-            Выйти из аккаунта
+            Выйти
           </button>
         </div>
       </div>
     </div>
   ) : (
-    <Link to="/login" className="signin">
-      <div className="signin-button">Вход</div>
-    </Link>
+    // <Link to="/login" className="signin">
+    //   <div className="signin-button">Вход</div>
+    // </Link>
+    <div className="signin-button">
+      <div>Вход</div>
+      <Login />
+    </div>
   );
 };

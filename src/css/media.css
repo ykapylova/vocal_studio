@@ -1,0 +1,114 @@
+@font-face {
+  font-family: Gilroy;
+  src: url("./../fonts/Gilroy-Light.woff2");
+}
+@font-face {
+  font-family: GilroyBold;
+  src: url("./../fonts/Gilroy-ExtraBold.otf");
+}
+:root {
+  --main-color: rgb(0, 0, 0);
+  --light-color: rgba(219, 162, 252, 0.532);
+  --input-color: rgba(236, 236, 236, 0.2);
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  font-family: Gilroy, sans-serif !important;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  font-size: 1.2em;
+}
+@media screen and (max-width: 430px) {
+  .App {
+    font-size: 1em;
+  }
+}
+.App input,
+.App select,
+.App button {
+  font-family: Gilroy, sans-serif !important;
+}
+.App main {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-height: 55vh;
+}
+@media screen and (max-width: 1050px) {
+  .App main {
+    min-height: calc(100vh - (38vh + 50px));
+    margin-top: 12vh;
+  }
+}
+.App main .wrapper {
+  width: 70vw;
+  gap: 20px;
+}
+@media screen and (max-width: 1050px) {
+  .App main .wrapper {
+    width: 90vw;
+  }
+}
+.App a {
+  color: white;
+  text-decoration: none;
+}
+.App a.active {
+  color: rgba(255, 255, 255, 0.747);
+}
+
+.wrapperMedia {
+  display: flex;
+  flex-wrap: wrap;
+  width: 820px;
+  justify-content: center;
+}
+.wrapperMedia .card {
+  display: block;
+  width: 350px;
+  height: 250px;
+  overflow: hidden;
+  background-color: var(--main-color);
+  position: relative;
+}
+.wrapperMedia .card img {
+  width: 100%;
+  transition: transform 0.7s ease-out;
+}
+.wrapperMedia .card .name {
+  position: absolute;
+  bottom: 30px;
+  left: 2%;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+}
+.wrapperMedia .card .date {
+  position: absolute;
+  bottom: 5px;
+  left: 2%;
+  color: white;
+  /* text-transform: uppercase; */
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+  font-size: 0.8em;
+}
+
+.wrapperMedia iframe {
+  width: 100%;
+}
+.wrapperMedia .card:hover img {
+  transform: scale(1.2);
+}
+
+/*# sourceMappingURL=media.css.map */

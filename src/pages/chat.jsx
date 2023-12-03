@@ -24,7 +24,9 @@ export const Chat = () => {
 
   return (
     <main>
-      <div></div>
+      <div>
+        <h1>Чат</h1>
+      </div>
       <div className="wrapper wrapperChat">
         <div className="posts">
           {postsList.map((post) => (

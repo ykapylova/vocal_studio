@@ -1,0 +1,55 @@
+@import "App";
+
+.wrapperAdmin {
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+
+    select {
+      @extend %form-fields;
+      height: 50px;
+      width: 320px;
+    }
+
+    input {
+      @extend %form-fields;
+      height: 50px;
+      width: 300px;
+
+      &::placeholder {
+        color: var(--light-color);
+        font-family: Gilroy;
+        font-size: 1em;
+      }
+    }
+
+    button {
+      @extend %button;
+      width: 320px;
+      height: 50px;
+    }
+  }
+
+  .students {
+    margin-top: 50px;
+    display: flex;
+    gap: 100px;
+
+    @media screen and (min-width: 700px) {
+      flex-direction: column;
+    }
+
+    > div {
+
+      flex-basis: fit-content;
+    }
+
+    .groupName {
+      font-size: 1.2em;
+      border-bottom: black dotted 2px;
+      margin-bottom: 10px;
+    }
+  }
+}
