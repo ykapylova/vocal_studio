@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -7,20 +7,22 @@ export const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // document.querySelector(".email").value + "@tiptop-crystal.com";
-  // document.querySelector(".password").value;
+
+  useEffect(() => {
+
+  }, [email, password])
 
   return (
     <form>
       <input
         type="text"
-        placeholder="Email"
+        placeholder="admin"
         className="email"
         onChange={(e) => setEmail(e.target.value + "@tiptop-crystal.com")}
       />
       <input
-        type="password"
-        placeholder="Password"
+        type="text"
+        placeholder="admin_"
         className="password"
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -33,6 +35,7 @@ export const Login = () => {
               // Signed in
               const user = userCredential.user;
               console.log(user);
+              navigate("/profile");
               // ...
             })
             .catch((error) => {
@@ -40,9 +43,13 @@ export const Login = () => {
               const errorCode = error.code;
               const errorMessage = error.message;
               console.log(errorCode + errorMessage);
+              navigate("/");
+              console.log(document.querySelector(".email").value)
+              document.querySelector(".email").value = "";
+              document.querySelector(".password").value = "";
+              setEmail("");
+              setPassword("");
             });
-
-          navigate("/profile");
         }}
       >
         Войти

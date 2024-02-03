@@ -36,5 +36,10 @@
     max-width: 50%;
   }
 }
+@media screen and (max-width: 430px) {
+  .wrapperAbout .about-item .img-container img {
+    height: auto;
+  }
+}
 
 /*# sourceMappingURL=about.css.map */

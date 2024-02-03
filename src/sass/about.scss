@@ -29,6 +29,10 @@
         @media screen and (max-width: 1050px) {
           max-width: 50%;
         }
+
+        @media screen and (max-width: 430px) {
+          height: auto;
+        }
       }
     }
   }
